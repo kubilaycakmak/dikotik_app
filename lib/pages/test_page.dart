@@ -82,15 +82,12 @@ class _TestPageState extends State<TestPage> {
                               }
                             }else{
                               setState(() {
-                                isClicked = false;
+                                isClicked = true;
                               });
                               if (widget.question.answer[index].value == 1.0) {
                                 user.setBothScore = user.getBothScore + 1.0;
-                                
+                              
                               }else{
-                                setState(() {
-                                  isClicked = true;
-                                });
                                 user.setBothScore = user.getBothScore - 1.0;
                               }
                           }
