@@ -1,13 +1,15 @@
-import 'package:dikotik_app/data/answers.dart';
+import 'package:dikotik_app/data/question.dart';
 import 'package:dikotik_app/pages/style/text_style.dart';
+import 'package:dikotik_app/pages/test_field_page.dart';
 import 'package:flutter/material.dart';
+
+import 'get_information_page.dart';
 
 class TestPage extends StatefulWidget {
   final String title;
-  final String desc;
-  final List<Answer> answers;
+  final Question question;
 
-  const TestPage({Key key, this.title, this.desc, this.answers})
+  const TestPage({Key key, this.title, this.question})
       : super(key: key);
 
   @override
@@ -15,6 +17,8 @@ class TestPage extends StatefulWidget {
 }
 
 class _TestPageState extends State<TestPage> {
+  bool isClicked = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +36,7 @@ class _TestPageState extends State<TestPage> {
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: Center(
                 child: Text(
-                  widget.desc,
+                  widget.question.title,
                   textAlign: TextAlign.center,
                   style: paragraphText,
                 ),
@@ -44,7 +48,7 @@ class _TestPageState extends State<TestPage> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: widget.answers.length,
+                itemCount: 5,
                 itemBuilder: (context, index) {
                   return Column(
                     children: <Widget>[
@@ -55,48 +59,68 @@ class _TestPageState extends State<TestPage> {
                         width: 250,
                         decoration: BoxDecoration(border: Border.all()),
                         child: FlatButton(
-                          color: Colors.white,
                           child: Text(
-                            widget.answers[index].title,
+                            widget.question.answer[index].title,
                             style: paragraphText,
                           ),
-                          onPressed: () {
-                            if (widget.answers[index].value == 1.0) {
-                              //do some
-                            } else {
-                              //do some
-                            }
-                          },
-                        ),
+                          onPressed: !isClicked ? () {
+                            setState(() {
+                              isClicked = true;
+                            });
+                            if(widget.question.side == 0){
+                              if (widget.question.answer[index].value == 1.0) {
+                                user.setLeftScore = user.getLeftScore + 1.0;
+                              }
+                              else{
+                                user.setLeftScore = user.getLeftScore - 1.0;
+                              }
+                            }else if(widget.question.side == 1){
+                              if (widget.question.answer[index].value == 1.0) {
+                                user.setRightScore = user.getRightScore + 1.0;
+                              }else{
+                                user.setRightScore = user.getRightScore - 1.0;
+                              }
+                            }else{
+                              setState(() {
+                                isClicked = false;
+                              });
+                              if (widget.question.answer[index].value == 1.0) {
+                                user.setBothScore = user.getBothScore + 1.0;
+                                
+                              }else{
+                                setState(() {
+                                  isClicked = true;
+                                });
+                                user.setBothScore = user.getBothScore - 1.0;
+                              }
+                          }
+                        } : null,
                       ),
-                    ],
-                  );
-                }),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget buildAnswer(List<Answer> text) {
-    return Column(
-      children: <Widget>[
-        SizedBox(
-          height: 10,
-        ),
-        Container(
+                    ),
+                  ],
+                );
+              }),
+          ),
+          SizedBox(height: 10,),
+          Container(
           width: 250,
-          decoration: BoxDecoration(border: Border.all()),
+          decoration: BoxDecoration(border: Border.all(), color: Colors.teal[300]),
           child: FlatButton(
-            color: Colors.white,
+            color: Colors.teal[300],
             child: Text(
-              text[0].title,
+              'Sonraki',
               style: paragraphText,
             ),
-            onPressed: () {},
+            onPressed: () {
+              controller.nextPage(duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+              print('both score : ${user.getBothScore}');
+              print('left score : ${user.getLeftScore}');
+              print('right score : ${user.getRightScore}');
+            },
           ),
         ),
-      ],
+        ],
+      ),
     );
   }
 }

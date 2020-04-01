@@ -1,6 +1,10 @@
-import 'package:dikotik_app/data/answers.dart';
+import 'package:dikotik_app/data/question.dart';
 import 'package:dikotik_app/pages/test_page.dart';
 import 'package:flutter/material.dart';
+import 'get_information_page.dart';
+PageController controller = PageController(
+  initialPage: 0,
+);
 
 class TestFieldPage extends StatefulWidget {
   @override
@@ -8,25 +12,40 @@ class TestFieldPage extends StatefulWidget {
 }
 
 class _TestFieldPageState extends State<TestFieldPage> {
+
+
   @override
   Widget build(BuildContext context) {
     return PageView(
-      physics: NeverScrollableScrollPhysics(),
       scrollDirection: Axis.vertical,
-      children: <Widget>[
+      controller: controller,
+      physics: NeverScrollableScrollPhysics(),
+      children: user.getSelectSex == 0 ? <Widget>[
         TestPage(
           title: 'DİKKATLİCE  DİNLEYİN (Alıştırma)',
-          desc:
-              'Bu testte sadece sol kulağınızdan duyduğunuz cümleyi işaretleyin.Ses otomatik olarak baslayacaktir.',
-          answers: answer,
+          question: wq1,
+        ),TestPage(
+          title: 'DİKKATLİCE  DİNLEYİN (Alıştırma)',
+          question: wq2,
+        ),TestPage(
+          title: 'DİKKATLİCE  DİNLEYİN (Alıştırma)',
+          question: wq3,
         ),
+        // TestPage(
+        //   title: 'DİKKATLİCE  DİNLEYİN (Alıştırma)',
+        //   desc:
+        //       'Bu testte sadece sol kulağınızdan duyduğunuz cümleyi işaretleyin. Ses otomatik olarak başlayacaktır.',
+        //   answers: questions,
+        // ),
+      ]
+      :
+      <Widget>[
         TestPage(
           title: 'DİKKATLİCE  DİNLEYİN (Alıştırma)',
-          desc:
-              'Bu testte sadece sol kulağınızdan duyduğunuz cümleyi işaretleyin.Ses otomatik olarak baslayacaktir.',
-          answers: answer,
+          question: mq1,
         ),
-      ],
+      ]
+      ,
     );
   }
 }

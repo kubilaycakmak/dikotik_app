@@ -1,6 +1,7 @@
 import 'package:dikotik_app/pages/style/text_style.dart';
 import 'package:flutter/material.dart';
 
+import 'get_information_page.dart';
 import 'voice_db_set_page.dart';
 
 class ChooseVoiceSexPage extends StatefulWidget {
@@ -32,7 +33,13 @@ class _ChooseVoiceSexPageState extends State<ChooseVoiceSexPage> {
                 'Kadın sesi dinle',
                 style: paragraphText,
               ),
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  user.setSelectSex = 0;
+                });
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => VoiceDbSetPage()));
+              },
             ),
           ),
           SizedBox(
@@ -47,28 +54,19 @@ class _ChooseVoiceSexPageState extends State<ChooseVoiceSexPage> {
                 'Erkek sesi dinle',
                 style: paragraphText,
               ),
-              onPressed: () {},
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
-            width: 250,
-            decoration:
-                BoxDecoration(border: Border.all(), color: Colors.teal[300]),
-            child: FlatButton(
-              color: Colors.teal[300],
-              child: Text(
-                'Devam Et',
-                style: paragraphText,
-              ),
               onPressed: () {
+                setState(() {
+                  user.setSelectSex = 1;
+                });
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => VoiceDbSetPage()));
               },
             ),
           ),
+          SizedBox(
+            height: 10,
+          ),
+          
         ],
       ),
     );
