@@ -132,7 +132,7 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
                               title: 'ALIŞTIRMA',
                               desc:
                                   'Bu kısım teste alışmanız içindir. Sonuca dahil edilmeyecektir.',
-                              desc2: '',
+                              desc2: Container(),
                               page: MaterialPageRoute(
                                   builder: (context) => TestFieldPage()),
                             )));

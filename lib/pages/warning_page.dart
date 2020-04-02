@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class WarningPage extends StatelessWidget {
   final String title;
   final String desc;
-  final String desc2;
+  final Widget desc2;
   final MaterialPageRoute page;
 
   const WarningPage({Key key, this.title, this.desc, this.desc2, this.page})
@@ -32,13 +32,9 @@ class WarningPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: Text(
-                desc2,
-                textAlign: TextAlign.center,
-                style: paragraphText,
-              ),
-            ),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                child: desc2),
             Container(
                 width: 250,
                 decoration: BoxDecoration(

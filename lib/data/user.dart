@@ -4,7 +4,8 @@ class User {
   String sex;
   double leftScore;
   double rightScore;
-  double bothScore;
+  double bothLeftScore;
+  double bothRightScore;
   double selectField;
   double selectSex;
 
@@ -14,7 +15,8 @@ class User {
     this.sex,
     this.leftScore,
     this.rightScore,
-    this.bothScore,
+    this.bothLeftScore,
+    this.bothRightScore,
     this.selectField,
     this.selectSex,
   });
@@ -49,10 +51,16 @@ class User {
     rightScore = newRightScore;
   }
 
-  double get getBothScore => bothScore;
+  double get getBothLeftScore => bothLeftScore;
 
-  set setBothScore(double newDoubleScore) {
-    bothScore = newDoubleScore;
+  set setBothLeftScore(double newDoubleScore) {
+    bothLeftScore = newDoubleScore;
+  }
+
+  double get getBothRightScore => bothRightScore;
+
+  set setBothRightScore(double newDoubleScore) {
+    bothRightScore = newDoubleScore;
   }
 
   double get getSelectSex => selectSex;
@@ -66,5 +74,4 @@ class User {
   set setSelectField(double newSelectField) {
     selectField = newSelectField;
   }
-  
 }

@@ -35,31 +35,33 @@ class _GetInformationPageState extends State<GetInformationPage> {
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: TextField(
               controller: c1,
-              onSubmitted: (val){
+              onSubmitted: (val) {
                 print('object');
               },
-              decoration:
-                  InputDecoration(hintText: 'Ad/soyad:', hintStyle: paragraphText),
+              decoration: InputDecoration(
+                  hintText: 'Ad/soyad:', hintStyle: paragraphText),
             ),
-          ),Padding(
+          ),
+          Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: TextField(
               controller: c2,
-              onSubmitted: (val){
+              onSubmitted: (val) {
                 print('object');
               },
               decoration:
                   InputDecoration(hintText: 'Yaş:', hintStyle: paragraphText),
             ),
-          ),Padding(
+          ),
+          Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: TextField(
               controller: c3,
-              onSubmitted: (val){
+              onSubmitted: (val) {
                 print('object');
               },
-              decoration:
-                  InputDecoration(hintText: 'Cinsiyet:', hintStyle: paragraphText),
+              decoration: InputDecoration(
+                  hintText: 'Cinsiyet:', hintStyle: paragraphText),
             ),
           ),
           SizedBox(
@@ -73,7 +75,16 @@ class _GetInformationPageState extends State<GetInformationPage> {
               color: Colors.teal[300],
               onPressed: () {
                 print(c1.text);
-                user = new User(name: c1.text, age: c2.text, sex: c3.text, leftScore: 0, rightScore: 0, bothScore: 0, selectField: 0, selectSex: 0);
+                user = new User(
+                    name: c1.text,
+                    age: c2.text,
+                    sex: c3.text,
+                    leftScore: 0,
+                    rightScore: 0,
+                    bothLeftScore: 0,
+                    bothRightScore: 0,
+                    selectField: 0,
+                    selectSex: 0);
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => PickTestPage()));
               },
