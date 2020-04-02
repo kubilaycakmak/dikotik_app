@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:dikotik_app/data/question.dart';
 import 'package:dikotik_app/pages/style/text_style.dart';
 import 'package:dikotik_app/pages/test_field_page.dart';
@@ -35,6 +37,12 @@ class _TestPageState extends State<TestPage> {
   void initState() {
     super.initState();
     startTimeout(12000);
+    loadMusic();
+  }
+
+  AudioPlayer advancedPlayer;
+  Future loadMusic() async {
+    advancedPlayer = await AudioCache().play(widget.question.pathAudio);
   }
 
   handleTimeout() {
@@ -70,8 +78,6 @@ class _TestPageState extends State<TestPage> {
         );
       },
     );
-    // controller.nextPage(
-    //     duration: Duration(milliseconds: 500), curve: Curves.easeIn);
   }
 
   @override

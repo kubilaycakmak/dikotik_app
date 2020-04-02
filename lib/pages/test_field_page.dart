@@ -49,7 +49,7 @@ class _TestFieldPageState extends State<TestFieldPage> {
                 desc2: Center(
                   child: Column(
                     children: <Widget>[
-                      Text('Sol kulak skoru:% ${user.getLeftScore}'),
+                      Text('Sol kulak skoru:% ${user.leftScore}'),
                       Text('Sag kulak skoru:% ${user.getRightScore}'),
                       Text(
                           'Her iki Sol kulak skoru:% ${user.getBothLeftScore}'),
@@ -58,9 +58,9 @@ class _TestFieldPageState extends State<TestFieldPage> {
                     ],
                   ),
                 ),
-                page: MaterialPageRoute(
-                  builder: (context) => EntryPage(),
-                ),
+                // page: MaterialPageRoute(
+                //   builder: (context) => EntryPage(),
+                // ),
               )
               // TestPage(
               //   title: 'DİKKATLİCE  DİNLEYİN (Alıştırma)',

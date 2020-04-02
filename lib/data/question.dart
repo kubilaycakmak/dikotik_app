@@ -38,7 +38,7 @@ var wq1 = new Question(
     Answer(title: 'Bebek Arabası Satıldı', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -53,7 +53,7 @@ var wq2 = new Question(
     Answer(title: 'Saatler Yeniden Ayarlandı', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound2.mp3',
   voiceSex: 0,
 );
 
@@ -68,7 +68,7 @@ var wq3 = new Question(
     Answer(title: 'Kuş Kafesten Uçtu', value: 1, side: 1),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound3.mp3',
   voiceSex: 0,
 );
 
@@ -83,7 +83,7 @@ var wq4 = new Question(
     Answer(title: 'Çocuklar Ekmek Yaptı', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound4.mp3',
   voiceSex: 0,
 );
 
@@ -99,7 +99,7 @@ var wq5 = new Question(
     Answer(title: 'Orman Yangınları Arttı', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound5.mp3',
   voiceSex: 0,
 );
 
@@ -114,7 +114,7 @@ var wq6 = new Question(
     Answer(title: 'Balık Sezonu Kapandı', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -129,7 +129,7 @@ var wq7 = new Question(
     Answer(title: 'Yeşil Gözleri Vardı', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -144,7 +144,7 @@ var wq8 = new Question(
     Answer(title: 'Almanya Dünya Kupasını Kazandı', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -159,7 +159,7 @@ var wq9 = new Question(
     Answer(title: 'Yeni Ev Aldılar', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -174,7 +174,7 @@ var wq10 = new Question(
     Answer(title: 'Uçak Alev Aldı', value: 1, side: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -189,7 +189,7 @@ var wq11 = new Question(
     Answer(title: 'Takım Kaptanı Değişti', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -204,7 +204,7 @@ var wq12 = new Question(
     Answer(title: 'Altın Fiyatı Yükseldi', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -219,7 +219,7 @@ var wq13 = new Question(
     Answer(title: 'Üniversite Sınavı Başladı', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -234,7 +234,7 @@ var wq14 = new Question(
     Answer(title: 'Ünlü Sanatçı Konser Verdi', value: 1, side: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -249,7 +249,7 @@ var wq15 = new Question(
     Answer(title: 'Balık Türleri Azaldı', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -264,7 +264,7 @@ var wq16 = new Question(
     Answer(title: ' Buraya Park Etmek Yasaktır', value: 1, side: 1),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -279,7 +279,7 @@ var wq17 = new Question(
     Answer(title: 'Öğrenciler Mavi Önlük Giydi', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -294,7 +294,7 @@ var wq18 = new Question(
     Answer(title: 'Güneş Işıl Işıl Parlıyor', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -309,7 +309,7 @@ var wq19 = new Question(
     Answer(title: 'Okyanus Kadar Mavi', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -324,7 +324,7 @@ var wq20 = new Question(
     Answer(title: 'Dünya Rekoru Kırdı', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -339,7 +339,7 @@ var wq21 = new Question(
     Answer(title: 'Güneş Gözlüğü İndirime Girdi', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -354,7 +354,7 @@ var wq22 = new Question(
     Answer(title: 'Eski Haline Döndü', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -369,7 +369,7 @@ var wq23 = new Question(
     Answer(title: 'Soba Alev Aldı', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -384,7 +384,7 @@ var wq24 = new Question(
     Answer(title: 'Balık Sezonu Kapandı', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -399,7 +399,7 @@ var wq25 = new Question(
     Answer(title: 'Ayna Yere Düştü', value: 1, side: 1),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -415,7 +415,7 @@ var wq26 = new Question(
     Answer(title: 'Akşam Haberleri Başladı', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -431,7 +431,7 @@ var wq27 = new Question(
     Answer(title: 'Kara Delik Bulundu', value: 1, side: 1),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -447,7 +447,7 @@ var wq28 = new Question(
     Answer(title: 'Markette İndirim Vardı', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -463,7 +463,7 @@ var wq29 = new Question(
     Answer(title: 'Doktor Reçete Yazdı', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -479,7 +479,7 @@ var wq30 = new Question(
     Answer(title: 'Spor Sağlık İçin Önemli', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -495,7 +495,7 @@ var wq31 = new Question(
     Answer(title: 'Çocuk Sırada Bekledi', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -511,7 +511,7 @@ var wq32 = new Question(
     Answer(title: 'Ormana Fidan Dikti', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -527,7 +527,7 @@ var wq33 = new Question(
     Answer(title: 'Uçak Seferi İptal Edildi', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -543,7 +543,7 @@ var wq34 = new Question(
     Answer(title: 'Orman Yangınları Arttı', value: 1, side: 1),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );
 
@@ -559,6 +559,6 @@ var wq35 = new Question(
     Answer(title: 'Sefer Saati Değişti', value: 0),
   ],
   order: 0,
-  pathAudio: 'assets/sound/woman/wsound1.mp3',
+  pathAudio: 'sound/woman/wsound1.mp3',
   voiceSex: 0,
 );

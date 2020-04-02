@@ -2,8 +2,10 @@ import 'package:dikotik_app/pages/style/text_style.dart';
 import 'package:dikotik_app/pages/test_field_page.dart';
 import 'package:dikotik_app/pages/warning_page.dart';
 import 'package:flutter/material.dart';
+import 'package:stereo/stereo.dart';
 import 'package:volume/volume.dart';
-import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class VoiceDbSetPage extends StatefulWidget {
   @override
@@ -13,36 +15,31 @@ class VoiceDbSetPage extends StatefulWidget {
 class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
   AudioManager audioManager;
   int maxVol, currentVol;
-  final assets = <String>[
-    "assets/sound/song1.mp3",
-    "assets/sound/ornek_dikotik.mpeg",
-  ];
-  var _currentAssetPosition = -1;
-  final AssetsAudioPlayer _assetsAudioPlayer = AssetsAudioPlayer();
 
-  void _open(int assetIndex) {
-    _currentAssetPosition = assetIndex % assets.length;
-    _assetsAudioPlayer.open(assets[_currentAssetPosition]);
-  }
-
-  void _playPause() {
-    _assetsAudioPlayer.playOrPause();
-  }
+  Stereo _stereo = new Stereo();
 
   @override
   void initState() {
     super.initState();
-    _open(_currentAssetPosition);
+    // _stereo.load("assets/sound/woman/wtestSound.mp3");
+    // _stereo.play();
+    initPlatformState();
+    updateVolumes();
   }
 
   @override
   void dispose() {
-    _assetsAudioPlayer.stop();
+    advancedPlayer = null;
     super.dispose();
   }
 
+  AudioPlayer advancedPlayer;
+  Future loadMusic() async {
+    advancedPlayer = await AudioCache().play("sound/woman/wtestSound.mp3");
+  }
+
   Future<void> initPlatformState() async {
-    await Volume.controlVolume(AudioManager.STREAM_SYSTEM);
+    await Volume.controlVolume(AudioManager.STREAM_MUSIC);
   }
 
   updateVolumes() async {
@@ -81,20 +78,13 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
           SizedBox(
             height: 20,
           ),
-          StreamBuilder(
-            stream: _assetsAudioPlayer.current,
-            initialData: PlayingAudio(),
-            builder: (context, snapshot) {
-              return IconButton(
-                iconSize: 50,
-                icon: Icon(
-                  Icons.play_circle_filled,
-                ),
-                onPressed: () {
-                  _open(1);
-                  _playPause();
-                },
-              );
+          IconButton(
+            iconSize: 50,
+            icon: Icon(
+              Icons.play_circle_filled,
+            ),
+            onPressed: () {
+              loadMusic();
             },
           ),
           (currentVol != null || maxVol != null)
@@ -102,6 +92,7 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                   child: Slider(
+                    activeColor: Colors.teal[300],
                     label: 'db',
                     value: currentVol / 1.0,
                     divisions: maxVol,
