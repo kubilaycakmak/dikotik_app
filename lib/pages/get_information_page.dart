@@ -19,6 +19,15 @@ class _GetInformationPageState extends State<GetInformationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60),
+        child: AppBar(
+          title: Text('Bilgi Ekranı'),
+          backgroundColor: Colors.indigo[900],
+          elevation: 0,
+        ),
+      ),
+      backgroundColor: Colors.white,
       body: Center(
         child: Container(
           width: 350,
@@ -27,64 +36,71 @@ class _GetInformationPageState extends State<GetInformationPage> {
               color: Colors.black87
             )
           ),
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 50),
-                child: Align(
-                  alignment: Alignment.topCenter,
-                  child: Text(
-                    'LÜTFEN BİLGİLERİNİNİZİ GİRİNİZ',
-                    style: titleText,
-                  ),
+          child: _buildGetInformation(context),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildGetInformation(BuildContext context) {
+    return Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 50),
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Text(
+                  'LÜTFEN BİLGİLERİNİNİZİ GİRİNİZ',
+                  style: titleText,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-                child: TextField(
-                  controller: c1,
-                  onSubmitted: (val) {
-                    print('object');
-                  },
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                      hintText: 'Ad/soyad:', hintStyle: textField),
-                ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+              child: TextField(
+                controller: c1,
+                onSubmitted: (val) {
+                  print('object');
+                },
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                    hintText: 'Ad/soyad:', hintStyle: textField),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-                child: TextField(
-                  controller: c2,
-                  onSubmitted: (val) {
-                    print('object');
-                  },
-                  decoration:
-                      InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Yaş:', hintStyle: textField),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-                child: TextField(
-                  controller: c3,
-                  onSubmitted: (val) {
-                    print('object');
-                  },
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                      hintText: 'Cinsiyet:', hintStyle: textField),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                width: 270,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+              child: TextField(
+                controller: c2,
+                onSubmitted: (val) {
+                  print('object');
+                },
                 decoration:
-                    BoxDecoration(border: Border.all(), color: Colors.teal[300]),
-                child: FlatButton(
-                  color: Colors.teal[300],
+                    InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Yaş:', hintStyle: textField),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+              child: TextField(
+                controller: c3,
+                onSubmitted: (val) {
+                  print('object');
+                },
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                    hintText: 'Cinsiyet:', hintStyle: textField),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+              Container(
+                width: 265,
+              decoration:
+                  BoxDecoration(border: Border.all(), color: Colors.indigo[900]),
+              child: FlatButton(
+                color: Colors.indigo[800],
                   onPressed: () {
                     print(c1.text);
                     user = new User(
@@ -101,15 +117,12 @@ class _GetInformationPageState extends State<GetInformationPage> {
                         MaterialPageRoute(builder: (context) => PickTestPage()));
                   },
                   child: Text(
-                    'Sonraki Sayfa',
+                    'Onayla',
                     style: paragraphText,
                   ),
                 ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
+              ),
+          ],
+        );
   }
 }

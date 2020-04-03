@@ -1,3 +1,4 @@
+import 'package:dikotik_app/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 
 import 'pages/entry_page.dart';
@@ -10,6 +11,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       color: Colors.white, 
-      home: EntryPage());
+      theme: ThemeData(
+        primarySwatch: Colors.indigo,
+      ),
+      home: Splashscreen());
   }
 }

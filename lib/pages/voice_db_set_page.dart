@@ -2,10 +2,11 @@ import 'package:dikotik_app/pages/style/text_style.dart';
 import 'package:dikotik_app/pages/test_field_page.dart';
 import 'package:dikotik_app/pages/warning_page.dart';
 import 'package:flutter/material.dart';
-import 'package:stereo/stereo.dart';
 import 'package:volume/volume.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
+
+import 'get_information_page.dart';
 
 class VoiceDbSetPage extends StatefulWidget {
   @override
@@ -16,26 +17,27 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
   AudioManager audioManager;
   int maxVol, currentVol;
 
-  Stereo _stereo = new Stereo();
-
   @override
   void initState() {
     super.initState();
-    // _stereo.load("assets/sound/woman/wtestSound.mp3");
-    // _stereo.play();
     initPlatformState();
     updateVolumes();
   }
 
   @override
   void dispose() {
-    advancedPlayer = null;
+    advancedPlayerWoman = null;
+    advancedPlayerMan = null;
     super.dispose();
   }
 
-  AudioPlayer advancedPlayer;
-  Future loadMusic() async {
-    advancedPlayer = await AudioCache().play("sound/woman/wtestSound.mp3");
+  AudioPlayer advancedPlayerWoman;
+  AudioPlayer advancedPlayerMan;
+  Future loadWSound() async {
+    advancedPlayerWoman = await AudioCache().play("sound/woman/wtestSound.mp3");
+  }
+  Future loadMSound() async {
+    advancedPlayerMan = await AudioCache().play("sound/man/mtestSound.mp3");
   }
 
   Future<void> initPlatformState() async {
@@ -84,7 +86,12 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
               Icons.play_circle_filled,
             ),
             onPressed: () {
-              loadMusic();
+              if(user.getSelectSex == 0){
+                loadWSound();
+              }
+              else{
+                loadMSound();
+              }
             },
           ),
           (currentVol != null || maxVol != null)
