@@ -6,6 +6,16 @@ class EntryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60),
+        child: AppBar(
+          centerTitle: true,
+          title: Text('Dikotik Testi'),
+          backgroundColor: Colors.cyan[900],
+          elevation: 0,
+        ),
+      ),
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           children: <Widget>[
