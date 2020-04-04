@@ -132,24 +132,12 @@ class _TestFieldPageState extends State<TestFieldPage> {
                 title: 'DİKKATLİCE  DİNLEYİN',
                 question: wq30,
               ),
-  
               WarningPage(
                 title: 'Sonuclar',
                 desc: 'Testi başarı ile tamamladınız',
-                desc2: Center(
-                  child: Column(
-                    children: <Widget>[
-                      Text('Sol kulak skoru:% ${user.leftScore}'),
-                      Text('Sag kulak skoru:% ${user.getRightScore}'),
-                      Text(
-                          'Her iki Sol kulak skoru:% ${user.getBothLeftScore}'),
-                      Text(
-                          'Her iki Sag kulak skoru:% ${user.getBothRightScore}'),
-                    ],
-                  ),
-                ),
+                desc2: Center(child: Text('Sonuçları görmek için devam ediniz...', style: TextStyle(fontSize: 18),),),
                 page: MaterialPageRoute(
-                  builder: (context) => EntryPage(),
+                  builder: (context) => ResultPage(),
                 ),
               )
             ]
