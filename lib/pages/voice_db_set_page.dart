@@ -30,6 +30,7 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
     advancedPlayerMan = null;
     super.dispose();
   }
+  
 
   AudioPlayer advancedPlayerWoman;
   AudioPlayer advancedPlayerMan;
@@ -59,13 +60,30 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60),
+        child: AppBar(
+          centerTitle: true,
+          title: Text('Ses Seviye Ekranı'),
+          backgroundColor: Colors.indigo[900],
+          elevation: 0,
+        ),
+      ),
+      backgroundColor: Colors.white,
+      body: _buildVoiceDB(context),
+    );
+  }
+
+  Center _buildVoiceDB(BuildContext context) {
+    return Center(
+      child: Column(
         children: <Widget>[
           Padding(
               padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
               child: Center(
                 child: Text(
                   'Ses Şiddetini Rahatça Duyabileceğiniz Seviyeye Ayarlayın',
+                  textAlign: TextAlign.center,
                   style: titleText,
                 ),
               )),
@@ -118,10 +136,10 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
           Container(
             width: 250,
             decoration:
-                BoxDecoration(border: Border.all(), color: Colors.teal[300]),
+                BoxDecoration(border: Border.all(), color: Colors.indigo[900]),
             child: FlatButton(
-              color: Colors.teal[300],
-              child: Text('Devam Et'),
+              color: Colors.indigo[800],
+              child: Text('Devam Et', style: paragraphText,),
               onPressed: () {
                 Navigator.push(
                     context,

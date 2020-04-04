@@ -18,11 +18,39 @@ class _ChooseVoiceSexPageState extends State<ChooseVoiceSexPage> {
 
   AudioPlayer advancedPlayerWoman;
   AudioPlayer advancedPlayerMan;
+  AudioCache audioCache = new AudioCache();
+  AudioPlayer advancedPlayer = new AudioPlayer();
+  AudioCache cacheWoman;
+  AudioCache cacheMan;
+  bool isPlay = false;
+  Duration duration;
+  String selectedChoiceButton = 'Kadın sesi';
+
   Future loadWSound() async {
-    advancedPlayerWoman = await AudioCache().play("sound/woman/wtestSound.mp3");
+    advancedPlayerWoman = await cacheWoman.play("sound/woman/wtestSound.mp3");
   }
   Future loadMSound() async {
-    advancedPlayerMan = await AudioCache().play("sound/man/mtestSound.mp3");
+    advancedPlayerMan = await cacheMan.play("sound/man/mtestSound.mp3");
+  }
+
+  void _stopWomanFile() {
+    advancedPlayerWoman?.stop(); // stop the file like this
+  }void _stopManFile() {
+    advancedPlayerMan?.stop(); // stop the file like this
+  }
+
+  @override
+  void initState() { 
+    super.initState();
+    cacheWoman = new AudioCache(fixedPlayer: advancedPlayerWoman);
+    cacheMan = new AudioCache(fixedPlayer: advancedPlayerMan);
+  }
+
+  @override
+  void dispose() { 
+    advancedPlayerMan.dispose();
+    advancedPlayerWoman.dispose();
+    super.dispose();
   }
 
   @override
@@ -46,70 +74,51 @@ class _ChooseVoiceSexPageState extends State<ChooseVoiceSexPage> {
     return Column(
       children: <Widget>[
         Padding(
-            padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
-            child: Center(
-              child: Text(
-                'Test yapmaya başlamadan önce kadın veya erkek sesinden birini seçiniz.',
-                textAlign: TextAlign.center,
-                style: titleText,
-              ),
-            )),
-       Container(
-            width: 250,
-            decoration:
-                BoxDecoration(border: Border.all(), color: Colors.indigo[900]),
-            child: FlatButton(
-              color: Colors.indigo[800],
+          padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+          child: Center(
             child: Text(
-              'Kadın sesi dinle',
-              style: paragraphText,
+              'Test yapmaya başlamadan önce kadın veya erkek sesinden birini seçiniz.',
+              textAlign: TextAlign.center,
+              style: titleText,
             ),
-            onPressed: () {
+          )
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ChoiceChip(
+            backgroundColor: Colors.indigo[900],
+            selectedColor: Colors.indigo[400],
+            labelPadding: EdgeInsets.all(8.0),
+            label: Text('Kadın sesi', style: paragraphText,), 
+            selected: selectedChoiceButton == "Kadın sesi",
+            onSelected: (val){
               setState(() {
+                selectedChoiceButton = "Kadın sesi";
+                loadWSound();
                 user.setSelectSex = 0;
               });
-              // advancedPlayerMan.pause();
-              // advancedPlayerWoman.pause();
-              loadWSound();
-              // Navigator.push(context,
-              //     MaterialPageRoute(builder: (context) => VoiceDbSetPage()));
             },
           ),
         ),
-        SizedBox(
-          height: 10,
-        ),
-        Container(
-            width: 250,
-            decoration:
-                BoxDecoration(border: Border.all(), color: Colors.indigo[900]),
-            child: FlatButton(
-              color: Colors.indigo[800],
-            child: Text(
-              'Erkek sesi dinle',
-              style: paragraphText,
-            ),
-            onPressed: () {
+        Padding(
+          
+          padding: const EdgeInsets.all(8.0),
+          child: ChoiceChip(
+            selectedColor: Colors.indigo[400],
+            backgroundColor: Colors.indigo[900],
+            labelPadding: EdgeInsets.all(8.0),
+            label: Text('Erkek sesi', style: paragraphText,), 
+            selected: selectedChoiceButton == "Erkek sesi",
+            onSelected: (val){
               setState(() {
+                selectedChoiceButton = "Erkek sesi";
+                loadMSound();
                 user.setSelectSex = 1;
               });
-              // advancedPlayerWoman.pause();
-              // advancedPlayerMan.pause();
-              if(AudioCache() == null){
-                loadMSound();
-              }
-              advancedPlayerWoman.pause();
-              advancedPlayerMan.pause();
-              
-              
-              // Navigator.push(context,
-              //     MaterialPageRoute(builder: (context) => VoiceDbSetPage()));
             },
           ),
         ),
-        SizedBox(
-          height: 10,
-        ),
+        SizedBox(height: 20,),
         Container(
             width: 250,
             decoration:
@@ -121,8 +130,6 @@ class _ChooseVoiceSexPageState extends State<ChooseVoiceSexPage> {
               style: paragraphText,
             ),
             onPressed: () {
-              advancedPlayerWoman.pause();
-              advancedPlayerMan.pause();
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => VoiceDbSetPage()));
             },
@@ -131,7 +138,6 @@ class _ChooseVoiceSexPageState extends State<ChooseVoiceSexPage> {
         SizedBox(
           height: 10,
         ),
-        
       ],
     );
   }

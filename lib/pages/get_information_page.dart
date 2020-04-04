@@ -31,11 +31,6 @@ class _GetInformationPageState extends State<GetInformationPage> {
       body: Center(
         child: Container(
           width: 350,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.black87
-            )
-          ),
           child: _buildGetInformation(context),
         ),
       ),

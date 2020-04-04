@@ -24,6 +24,18 @@ class _TestPageState extends State<TestPage> {
   List<Answer> selectedChoices = List();
   String selectedChoiceButton = '';
   double selectedChoiceValueButton = 0;
+  bool isClicked = false;
+
+  Color colortoshow = Colors.indigoAccent;
+  Color right = Colors.green;
+  Color wrong = Colors.red;
+  int marks = 0;
+  int i = 1;
+  // extra varibale to iterate
+  int j = 1;
+  int timer = 12;
+  String showtimer = "12";
+  bool canceltimer = false;
 
   static const timeout = const Duration(seconds: 3);
   static const ms = const Duration(milliseconds: 1);
@@ -36,8 +48,42 @@ class _TestPageState extends State<TestPage> {
   @override
   void initState() {
     super.initState();
-    startTimeout(12000);
+    // startTimeout(12000);
+    starttimer();
     loadMusic();
+  }
+
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
+  void starttimer() async {
+    const onesec = Duration(seconds: 1);
+    Timer.periodic(onesec, (Timer t) {
+      setState(() {
+        if (timer < 1) {
+          t.cancel();
+          nextquestion();
+        } else if (canceltimer == true) {
+          t.cancel();
+        } else {
+          timer = timer - 1;
+        }
+        showtimer = timer.toString();
+      });
+    });
+  }
+
+    void nextquestion() {
+    canceltimer = false;
+    timer = 12;
+    controller.nextPage(
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.easeIn);
+    starttimer();
   }
 
   AudioPlayer advancedPlayer;
@@ -83,162 +129,207 @@ class _TestPageState extends State<TestPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Padding(
-              padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
-              child: Center(
-                child: Text(
-                  widget.title,
-                  style: titleText,
-                ),
-              )),
-          Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: Center(
-                child: Text(
-                  widget.question.title,
-                  textAlign: TextAlign.center,
-                  style: paragraphText,
-                ),
-              )),
-          SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: widget.question.answer.length,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 10,
-                      ),
-                      widget.question.side == 2
-                          ? Container(
-                              width: 250,
-                              decoration: BoxDecoration(
-                                  border: Border.all(),
-                                  color: selectedChoices.contains(
-                                          widget.question.answer[index])
-                                      ? Colors.teal[300]
-                                      : Colors.white),
-                              child: ChoiceChip(
-                                selectedShadowColor: Colors.white,
-                                shadowColor: Colors.white,
-                                selectedColor: Colors.teal[300],
-                                backgroundColor: Colors.white10,
-                                label: Text(
-                                  widget.question.answer[index].title,
-                                  style: TextStyle(
-                                      color: selectedChoices.contains(
-                                              widget.question.answer[index])
-                                          ? Colors.white
-                                          : Colors.black),
-                                ),
-                                selected: selectedChoices
-                                    .contains(widget.question.answer[index]),
-                                onSelected: (val) {
-                                  setState(() {
-                                    selectedChoices.contains(
-                                            widget.question.answer[index])
-                                        ? selectedChoices.remove(
-                                            widget.question.answer[index])
-                                        : selectedChoices.length == 2
-                                            ? 0
-                                            : selectedChoices.add(
-                                                widget.question.answer[index]);
-                                  });
-                                },
-                              ))
-                          : Container(
-                              width: 250,
-                              decoration: BoxDecoration(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60),
+        child: AppBar(
+          centerTitle: true,
+          title: Text(widget.title == 'DİKKATLİCE  DİNLEYİN (Alıştırma)' ? 'Alıştırma' : 'Test'),
+          backgroundColor: Colors.indigo[900],
+          elevation: 0,
+          leading: Icon(Icons.not_interested, color: Colors.transparent,),
+        ),
+      ),
+      backgroundColor: Colors.white,
+      body:_buildTestArea(),
+    );
+  }
+
+  Column _buildTestArea() {
+    return Column(
+      children: <Widget>[
+        Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            child: Center(
+              child: Text(
+                widget.title,
+                style: titleText,
+              ),
+            )),
+        Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            child: Center(
+              child: Text(
+                widget.question.title,
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.black, fontSize: 18),
+              ),
+            )),
+        SizedBox(
+          height: 10,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: widget.question.answer.length,
+              itemBuilder: (context, index) {
+                return Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10,
+                    ),
+                    widget.question.side == 2
+                        ? Container(
+                            width: 250,
+                            decoration: BoxDecoration(
                                 border: Border.all(),
-                                color: selectedChoiceButton ==
-                                        widget.question.answer[index].title
-                                    ? Colors.teal[300]
-                                    : Colors.white,
-                              ),
-                              child: FlatButton(
-                                color: selectedChoiceButton ==
-                                        widget.question.answer[index].title
-                                    ? Colors.teal[300]
-                                    : Colors.white,
-                                child: Text(
-                                  widget.question.answer[index].title,
-                                  style: TextStyle(
-                                    color: selectedChoiceButton ==
-                                            widget.question.answer[index].title
+                                color: selectedChoices.contains(
+                                        widget.question.answer[index])
+                                    ? Colors.indigo[900]
+                                    : Colors.white),
+                            child: ChoiceChip(
+                              selectedShadowColor: Colors.white,
+                              shadowColor: Colors.white,
+                              selectedColor: Colors.indigo[900],
+                              backgroundColor: Colors.white10,
+                              label: Text(
+                                widget.question.answer[index].title,
+                                style: TextStyle(
+                                    color: selectedChoices.contains(
+                                            widget.question.answer[index])
                                         ? Colors.white
-                                        : Colors.black,
-                                  ),
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    selectedChoiceButton =
-                                        widget.question.answer[index].title;
-                                    selectedChoiceValueButton =
-                                        widget.question.answer[index].value;
-                                  });
-                                },
+                                        : Colors.black),
                               ),
+                              selected: selectedChoices
+                                  .contains(widget.question.answer[index]),
+                              onSelected: (val) {
+                                setState(() {
+                                  isClicked = true;
+                                  selectedChoices.contains(
+                                          widget.question.answer[index])
+                                      ? selectedChoices.remove(
+                                          widget.question.answer[index])
+                                      : selectedChoices.length == 2
+                                          ? 0
+                                          : selectedChoices.add(
+                                              widget.question.answer[index]);
+                                });
+                              },
+                            ))
+                        : Container(
+                            width: 250,
+                            decoration: BoxDecoration(
+                              border: Border.all(),
+                              color: selectedChoiceButton ==
+                                      widget.question.answer[index].title
+                                  ? Colors.indigo[900]
+                                  : Colors.white,
                             ),
-                    ],
-                  );
-                }),
+                            child: FlatButton(
+                              color: selectedChoiceButton ==
+                                      widget.question.answer[index].title
+                                  ? Colors.indigo[900]
+                                  : Colors.white,
+                              child: Text(
+                                widget.question.answer[index].title,
+                                style: TextStyle(
+                                  color: selectedChoiceButton ==
+                                          widget.question.answer[index].title
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  setState(() {
+                                    isClicked=true;
+                                  });
+                                  selectedChoiceButton =
+                                      widget.question.answer[index].title;
+                                  selectedChoiceValueButton =
+                                      widget.question.answer[index].value;
+                                });
+                              },
+                            ),
+                          ),
+                  ],
+                );
+              }),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          showtimer,
+          style: TextStyle(
+            fontSize: 35.0,
+            fontWeight: FontWeight.w700,
+            fontFamily: 'Times New Roman',
           ),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
+        ),
+        Container(
             width: 250,
             decoration:
-                BoxDecoration(border: Border.all(), color: Colors.teal[300]),
+                BoxDecoration(border: Border.all(), color: Colors.indigo[900]),
             child: FlatButton(
-              color: Colors.teal[300],
-              child: Text(
-                'Sonraki',
-                style: paragraphText,
-              ),
-              onPressed: () {
-                if (widget.question.side == 0) {
-                  if (selectedChoiceValueButton == 1.0) {
-                    user.setLeftScore = user.getLeftScore + 10.0;
-                  }
-                } else if (widget.question.side == 1) {
-                  if (selectedChoiceValueButton == 1.0) {
-                    user.setRightScore = user.getRightScore + 10.0;
-                  }
-                }
-                if (widget.question.side == 2) {
-                  if (selectedChoices.length == 2) {
-                    if (selectedChoices[0].side == 0)
-                      user.setBothLeftScore = user.getBothLeftScore + 10.0;
-                    if (selectedChoices[0].side == 1)
-                      user.setBothRightScore = user.getBothRightScore + 10.0;
-                    if (selectedChoices[1].side == 0)
-                      user.setBothLeftScore = user.getBothLeftScore + 10.0;
-                    if (selectedChoices[1].side == 1)
-                      user.setBothRightScore = user.getBothRightScore + 10.0;
-                  }
-                }
-                controller.nextPage(
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.easeIn);
-
-                print('===============================');
-                print('both left score : ${user.getBothLeftScore}');
-                print('both right score : ${user.getBothRightScore}');
-                print('left score : ${user.getLeftScore}');
-                print('right score : ${user.getRightScore}');
-              },
+              color: Colors.indigo[800],
+            child: Text(
+              'Sonraki',
+              style: paragraphText,
             ),
+            onPressed:
+            !isClicked ? null :
+            widget.title == 'DİKKATLİCE  DİNLEYİN (Alıştırma)'?
+            () 
+            {
+              controller.nextPage(
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.easeIn);
+
+              print('===============================');
+              print('both left score : ${user.getBothLeftScore}');
+              print('both right score : ${user.getBothRightScore}');
+              print('left score : ${user.getLeftScore}');
+              print('right score : ${user.getRightScore}');
+            }:
+            (){
+              setState(() {
+                if (widget.question.side == 0) {
+                if (selectedChoiceValueButton == 1.0) {
+                  user.setLeftScore = user.getLeftScore + 10.0;
+                }
+              } else if (widget.question.side == 1) {
+                if (selectedChoiceValueButton == 1.0) {
+                  user.setRightScore = user.getRightScore + 10.0;
+                }
+              }
+              if (widget.question.side == 2) {
+                if (selectedChoices.length == 2) {
+                  if (selectedChoices[0].side == 0)
+                    user.setBothLeftScore = user.getBothLeftScore + 10.0;
+                  if (selectedChoices[0].side == 1)
+                    user.setBothRightScore = user.getBothRightScore + 10.0;
+                  if (selectedChoices[1].side == 0)
+                    user.setBothLeftScore = user.getBothLeftScore + 10.0;
+                  if (selectedChoices[1].side == 1)
+                    user.setBothRightScore = user.getBothRightScore + 10.0;
+                }
+              }
+              controller.nextPage(
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.easeIn);
+
+              print('===============================');
+              print('both left score : ${user.getBothLeftScore}');
+              print('both right score : ${user.getBothRightScore}');
+              print('left score : ${user.getLeftScore}');
+              print('right score : ${user.getRightScore}');
+              });
+            }
+            ,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
