@@ -15,7 +15,6 @@ class ChooseVoiceSexPage extends StatefulWidget {
 }
 
 class _ChooseVoiceSexPageState extends State<ChooseVoiceSexPage> {
-
   AudioPlayer advancedPlayerWoman;
   AudioPlayer advancedPlayerMan;
   AudioCache audioCache = new AudioCache();
@@ -29,25 +28,38 @@ class _ChooseVoiceSexPageState extends State<ChooseVoiceSexPage> {
   Future loadWSound() async {
     advancedPlayerWoman = await cacheWoman.play("sound/woman/wtestSound.mp3");
   }
+
   Future loadMSound() async {
     advancedPlayerMan = await cacheMan.play("sound/man/mtestSound.mp3");
   }
 
-  void _stopWomanFile() {
-    advancedPlayerWoman?.stop(); // stop the file like this
-  }void _stopManFile() {
-    advancedPlayerMan?.stop(); // stop the file like this
+  Future loadWWordSound() async {
+    advancedPlayerWoman =
+        await cacheWoman.play("sound1/woman/35wWordSound.mp3");
+  }
+
+  Future loadMWordSound() async {
+    advancedPlayerMan = await cacheMan.play("sound1/man/35mWordSound.mp3");
+  }
+
+  Future loadWNumberSound() async {
+    advancedPlayerWoman =
+        await cacheWoman.play("sound2/woman/35wNumberSound.mp3");
+  }
+
+  Future loadMNumberSound() async {
+    advancedPlayerMan = await cacheMan.play("sound2/man/35mNumberSound.mp3");
   }
 
   @override
-  void initState() { 
+  void initState() {
     super.initState();
     cacheWoman = new AudioCache(fixedPlayer: advancedPlayerWoman);
     cacheMan = new AudioCache(fixedPlayer: advancedPlayerMan);
   }
 
   @override
-  void dispose() { 
+  void dispose() {
     advancedPlayerMan.dispose();
     advancedPlayerWoman.dispose();
     super.dispose();
@@ -74,57 +86,71 @@ class _ChooseVoiceSexPageState extends State<ChooseVoiceSexPage> {
     return Column(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
-          child: Center(
-            child: Text(
-              'Test yapmaya başlamadan önce kadın veya erkek sesinden birini seçiniz.',
-              textAlign: TextAlign.center,
-              style: titleText,
-            ),
-          )
-        ),
+            padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+            child: Center(
+              child: Text(
+                'Test yapmaya başlamadan önce kadın veya erkek sesinden birini seçiniz.',
+                textAlign: TextAlign.center,
+                style: titleText,
+              ),
+            )),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: ChoiceChip(
             backgroundColor: Colors.indigo[900],
             selectedColor: Colors.indigo[400],
             labelPadding: EdgeInsets.all(8.0),
-            label: Text('Kadın sesi', style: paragraphText,), 
+            label: Text(
+              'Kadın sesi',
+              style: paragraphText,
+            ),
             selected: selectedChoiceButton == "Kadın sesi",
-            onSelected: (val){
+            onSelected: (val) {
               setState(() {
                 selectedChoiceButton = "Kadın sesi";
-                loadWSound();
+                widget.testUnit == '2'
+                    ? loadWSound()
+                    : widget.testUnit == '1'
+                        ? loadWNumberSound()
+                        : loadWWordSound();
                 user.setSelectSex = 0;
               });
             },
           ),
         ),
         Padding(
-          
           padding: const EdgeInsets.all(8.0),
           child: ChoiceChip(
             selectedColor: Colors.indigo[400],
             backgroundColor: Colors.indigo[900],
             labelPadding: EdgeInsets.all(8.0),
-            label: Text('Erkek sesi', style: paragraphText,), 
+            label: Text(
+              'Erkek sesi',
+              style: paragraphText,
+            ),
             selected: selectedChoiceButton == "Erkek sesi",
-            onSelected: (val){
+            onSelected: (val) {
               setState(() {
                 selectedChoiceButton = "Erkek sesi";
-                loadMSound();
+                widget.testUnit == '2'
+                    ? loadMSound()
+                    : widget.testUnit == '1'
+                        ? loadMNumberSound()
+                        : loadMWordSound();
                 user.setSelectSex = 1;
               });
             },
           ),
         ),
-        SizedBox(height: 20,),
+        SizedBox(
+          height: 20,
+        ),
         Container(
-            width: 250,
-            decoration:
-                BoxDecoration(border: Border.all(), color: Colors.indigo[900]),
-            child: FlatButton(
-              color: Colors.indigo[800],
+          width: 250,
+          decoration:
+              BoxDecoration(border: Border.all(), color: Colors.indigo[900]),
+          child: FlatButton(
+            color: Colors.indigo[800],
             child: Text(
               'Onayla',
               style: paragraphText,

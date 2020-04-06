@@ -2,6 +2,8 @@ import 'package:dikotik_app/pages/choose_voice_sex.dart';
 import 'package:dikotik_app/pages/style/text_style.dart';
 import 'package:flutter/material.dart';
 
+import 'get_information_page.dart';
+
 class PickTestPage extends StatefulWidget {
   @override
   _PickTestPageState createState() => _PickTestPageState();
@@ -36,92 +38,40 @@ class _PickTestPageState extends State<PickTestPage> {
                 style: titleText,
               ),
             )),
-            customCard(langname: 'Dikotik Sayı ve Kelime Testi', des: '1', image: 'assets/images/entry.png'),
-            customCard(langname: 'Dikotik Cümle Tanımlama Testi', des: '2', image: 'assets/images/entry.png')
-        // Container(
-        //   width: 250,
-        //   decoration: BoxDecoration(border: Border.all()),
-        //   child: FlatButton(
-        //     color: Colors.white,
-        //     child: Text(
-        //       'Dikotik Sayı Testi',
-        //       style: paragraphText,
-        //     ),
-        //     onPressed: () {
-        //       setState(() {
-        //         user.setSelectField = 0;
-        //       });
-        //                       Navigator.push(
-        //           context,
-        //           MaterialPageRoute(
-        //               builder: (context) => ChooseVoiceSexPage()));
-        //     },
-        //   ),
-        // ),
-        // SizedBox(
-        //   height: 10,
-        // ),
-        // Container(
-        //   width: 250,
-        //   decoration: BoxDecoration(border: Border.all()),
-        //   child: FlatButton(
-        //     color: Colors.white,
-        //     child: Text(
-        //       'Dikotik Kelime Testi',
-        //       style: paragraphText,
-        //     ),
-        //     onPressed: () {
-        //       setState(() {
-        //         user.setSelectField = 1;
-        //       });
-        //       Navigator.push(
-        //       context,
-        //       MaterialPageRoute(
-        //           builder: (context) => ChooseVoiceSexPage()));
-        //     },
-        //   ),
-        // ),
-        // SizedBox(
-        //   height: 10,
-        // ),
-        // Container(
-        //   width: 250,
-        //   decoration: BoxDecoration(border: Border.all()),
-        //   child: FlatButton(
-        //     color: Colors.white,
-        //     child: Text(
-        //       'Dikotik Cümle Tanımlama Testi',
-        //       textAlign: TextAlign.center,
-        //       style: paragraphText,
-        //     ),
-        //     onPressed: () {
-        //       setState(() {
-        //         user.setSelectField = 2;
-        //         print(user.getSelectField);
-        //       });
-        //       Navigator.push(
-        //           context,
-        //           MaterialPageRoute(
-        //               builder: (context) => ChooseVoiceSexPage()));
-        //     },
-        //   ),
-        // ),
+        customCard(
+            langname: 'Dikotik Sayı Testi',
+            des: '1',
+            image: 'assets/images/entry.png'),
+        customCard(
+            langname: 'Dikotik Kelime Testi',
+            des: '3',
+            image: 'assets/images/entry.png'),
+        customCard(
+            langname: 'Dikotik Cümle \nTanımlama Testi',
+            des: '2',
+            image: 'assets/images/entry.png')
       ],
     );
   }
 
-  Widget customCard({String langname, String image, String des}){
+  Widget customCard({String langname, String image, String des}) {
     return Padding(
       padding: EdgeInsets.symmetric(
         vertical: 20.0,
         horizontal: 30.0,
       ),
       child: InkWell(
-        onTap: (){
+        onTap: () {
+          setState(() {
+            user.setSelectText = des;
+            print(user.getSelectText);
+          });
           Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ChooseVoiceSexPage(testUnit: des,)));
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ChooseVoiceSexPage(
+                        testUnit: des,
+                      )));
         },
         child: Material(
           color: Colors.indigo[900],

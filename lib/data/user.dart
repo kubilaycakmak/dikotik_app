@@ -8,18 +8,19 @@ class User {
   double bothRightScore;
   double selectField;
   double selectSex;
+  String selectTest;
 
-  User({
-    this.name,
-    this.age,
-    this.sex,
-    this.leftScore,
-    this.rightScore,
-    this.bothLeftScore,
-    this.bothRightScore,
-    this.selectField,
-    this.selectSex,
-  });
+  User(
+      {this.name,
+      this.age,
+      this.sex,
+      this.leftScore,
+      this.rightScore,
+      this.bothLeftScore,
+      this.bothRightScore,
+      this.selectField,
+      this.selectSex,
+      this.selectTest});
 
   String get getName => name;
 
@@ -31,6 +32,12 @@ class User {
 
   set setAge(String newAge) {
     age = newAge;
+  }
+
+  String get getSelectText => selectTest;
+
+  set setSelectText(String newName) {
+    selectTest = newName;
   }
 
   String get getSex => sex;

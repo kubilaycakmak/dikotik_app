@@ -30,68 +30,64 @@ class WarningPage extends StatelessWidget {
 
   Widget buildWarningPageBody(BuildContext context) {
     return Center(
-        child: Container(
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.indigo[900],
-              width: 20
-            )
-          ),
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 50),
-                child: Text(
-                  title,
-                  textAlign: TextAlign.center,
-                  style: titleText,
-                ),
+      child: Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.indigo[900], width: 20)),
+        child: ListView(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Text(
+                title,
+                textAlign: TextAlign.center,
+                style: titleText,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                child: Text(
-                  desc,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              child: Text(
+                desc,
+                style: TextStyle(color: Colors.black, fontSize: 18),
+              ),
+            ),
+            Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                child: desc2),
+            Container(
+                width: 250,
+                decoration: BoxDecoration(
+                    border: Border.all(), color: Colors.indigo[900]),
+                child: FlatButton(
+                  color: Colors.indigo[800],
+                  child: Text(
+                    'Tamam',
+                    style: paragraphText,
                   ),
-                ),
-              ),
-              Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  child: desc2),
-              Container(
-                  width: 250,
-                  decoration: BoxDecoration(
-                      border: Border.all(), color: Colors.indigo[900]),
-                  child: FlatButton(
-                    color: Colors.indigo[800],
-                    child: Text(
-                      'Tamam',
-                      style: paragraphText,
-                    ),
-                    onPressed: () {
-                      title == 'ALIŞTIRMA'?
-                     Navigator.pushAndRemoveUntil(
-                      context, page, (Route<dynamic> route) => false,)
-                    : title == 'Sonuclar' ?
-                    Navigator.pushAndRemoveUntil(
-                      context, page, (Route<dynamic> route) => false,)
-                      :
-                      title == '' ?
-                      Navigator.push(context, page)
-                      :
-                    controller.nextPage(
-                  duration: Duration(milliseconds: 500),
-                  curve: Curves.easeIn);
-                    },
-                  ))
-            ],
-          ),
+                  onPressed: () {
+                    title == 'ALIŞTIRMA'
+                        ? Navigator.pushAndRemoveUntil(
+                            context,
+                            page,
+                            (Route<dynamic> route) => false,
+                          )
+                        : title == 'SONUÇ'
+                            ? Navigator.pushAndRemoveUntil(
+                                context,
+                                page,
+                                (Route<dynamic> route) => false,
+                              )
+                            : title == ''
+                                ? Navigator.push(context, page)
+                                : controller.nextPage(
+                                    duration: Duration(milliseconds: 500),
+                                    curve: Curves.easeIn);
+                  },
+                ))
+          ],
         ),
+      ),
     );
   }
 }
