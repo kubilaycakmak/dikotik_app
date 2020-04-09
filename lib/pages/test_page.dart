@@ -33,8 +33,8 @@ class _TestPageState extends State<TestPage> {
   int i = 1;
   // extra varibale to iterate
   int j = 1;
-  int timer = 12;
-  String showtimer = "12";
+  int timer = 13;
+  String showtimer = "13";
   bool canceltimer = false;
 
   static const timeout = const Duration(seconds: 3);
@@ -63,7 +63,7 @@ class _TestPageState extends State<TestPage> {
     const onesec = Duration(seconds: 1);
     Timer.periodic(onesec, (Timer t) {
       setState(() {
-        if (timer == 10) {
+        if (timer == 11) {
           loadMusic();
         }
         if (timer < 1) {
@@ -81,7 +81,7 @@ class _TestPageState extends State<TestPage> {
 
   void nextquestion() {
     canceltimer = false;
-    timer = 12;
+    timer = 13;
     controller.nextPage(
         duration: Duration(milliseconds: 500), curve: Curves.easeIn);
     starttimer();
@@ -199,17 +199,23 @@ class _TestPageState extends State<TestPage> {
                                     ? Colors.indigo[900]
                                     : Colors.white),
                             child: ChoiceChip(
+                              labelPadding:
+                                  EdgeInsets.symmetric(horizontal: 10),
                               selectedShadowColor: Colors.white,
                               shadowColor: Colors.white,
                               selectedColor: Colors.indigo[900],
                               backgroundColor: Colors.white10,
-                              label: Text(
-                                widget.question.answer[index].title,
-                                style: TextStyle(
-                                    color: selectedChoices.contains(
-                                            widget.question.answer[index])
-                                        ? Colors.white
-                                        : Colors.black),
+                              label: Container(
+                                width: 250,
+                                child: Text(
+                                  widget.question.answer[index].title,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: selectedChoices.contains(
+                                              widget.question.answer[index])
+                                          ? Colors.white
+                                          : Colors.black),
+                                ),
                               ),
                               selected: selectedChoices
                                   .contains(widget.question.answer[index]),
@@ -290,7 +296,7 @@ class _TestPageState extends State<TestPage> {
             ),
             onPressed: !isClicked
                 ? null
-                : widget.title == 'DİKKATLİCE  DİNLEYİN (Alıştırma)'
+                : widget.title == 'DİKKATLİCE  DİNLEYİN '
                     ? () {
                         controller.nextPage(
                             duration: Duration(milliseconds: 500),
@@ -314,25 +320,30 @@ class _TestPageState extends State<TestPage> {
                             }
                           }
                           if (widget.question.side == 2) {
-                            if (selectedChoices.length == 2) {
-                              if (selectedChoices[0].side == 0)
-                                user.setBothLeftScore =
-                                    user.getBothLeftScore + 20.0;
-                              if (selectedChoices[0].side == 1)
-                                user.setBothRightScore =
-                                    user.getBothRightScore + 20.0;
-                              if (selectedChoices[1].side == 0)
-                                user.setBothLeftScore =
-                                    user.getBothLeftScore + 20.0;
-                              if (selectedChoices[1].side == 1)
-                                user.setBothRightScore =
-                                    user.getBothRightScore + 20.0;
+                            if (selectedChoices.length >= 1) {
+                              if (selectedChoices[0].value == 1) {
+                                if (selectedChoices[0].side == 0) {
+                                  user.setBothLeftScore =
+                                      user.getBothLeftScore + 10.0;
+                                } else {
+                                  user.setBothRightScore =
+                                      user.getBothRightScore + 10.0;
+                                }
+                              }
+                              if (selectedChoices[1].value == 1) {
+                                if (selectedChoices[1].side == 0) {
+                                  user.setBothLeftScore =
+                                      user.getBothLeftScore + 10.0;
+                                } else {
+                                  user.setBothRightScore =
+                                      user.getBothRightScore + 10.0;
+                                }
+                              }
                             }
                           }
                           controller.nextPage(
                               duration: Duration(milliseconds: 500),
                               curve: Curves.easeIn);
-
                           print('===============================');
                           print('both left score : ${user.getBothLeftScore}');
                           print('both right score : ${user.getBothRightScore}');

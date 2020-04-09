@@ -18,7 +18,7 @@ class WarningPage extends StatelessWidget {
         preferredSize: Size.fromHeight(60),
         child: AppBar(
           centerTitle: true,
-          title: Text('Uyarı'),
+          title: Text('Uyarı'.toUpperCase()),
           backgroundColor: Colors.indigo[900],
           elevation: 0,
         ),
@@ -37,9 +37,9 @@ class WarningPage extends StatelessWidget {
         child: ListView(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 0),
               child: Text(
-                title,
+                title.toUpperCase(),
                 textAlign: TextAlign.center,
                 style: titleText,
               ),
@@ -48,15 +48,17 @@ class WarningPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: Text(
                 desc,
+                textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black, fontSize: 18),
               ),
             ),
             Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                child: desc2),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              child: desc2,
+            ),
             Container(
                 width: 250,
+                margin: EdgeInsets.all(15),
                 decoration: BoxDecoration(
                     border: Border.all(), color: Colors.indigo[900]),
                 child: FlatButton(

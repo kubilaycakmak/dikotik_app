@@ -17,7 +17,7 @@ class _ResultPageState extends State<ResultPage> {
           preferredSize: Size.fromHeight(60),
           child: AppBar(
             centerTitle: true,
-            title: Text('Sonuç'),
+            title: Text('Sonuç'.toUpperCase()),
             backgroundColor: Colors.indigo[900],
             elevation: 0,
             leading: Icon(

@@ -95,7 +95,7 @@ var wqSentences4 = new Question(
 
 var wqSentences5 = new Question(
   title:
-      "'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleleri işaretleyiniz.",
+      "'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleyi işaretleyiniz.",
   side: 2,
   answer: <Answer>[
     Answer(title: "Tıp Merkezi Açıldı", value: 1, side: 0),
@@ -411,7 +411,7 @@ var wqSentences25 = new Question(
 
 var wqSentences26 = new Question(
   title:
-      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleleri işaretleyiniz.",
+      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleyi işaretleyiniz.",
   side: 2,
   answer: <Answer>[
     Answer(title: "Güneşli Günler Yaklaştı", value: 1, side: 0),
@@ -427,7 +427,7 @@ var wqSentences26 = new Question(
 
 var wqSentences27 = new Question(
   title:
-      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleleri işaretleyiniz.",
+      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleyi işaretleyiniz.",
   side: 2,
   answer: <Answer>[
     Answer(title: "Sınıfta Şarkı Söyledi", value: 0),
@@ -443,7 +443,7 @@ var wqSentences27 = new Question(
 
 var wqSentences28 = new Question(
   title:
-      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleleri işaretleyiniz.",
+      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleyi işaretleyiniz.",
   side: 2,
   answer: <Answer>[
     Answer(title: "Ödül İçin Sahneye Çıktı", value: 1, side: 0),
@@ -459,7 +459,7 @@ var wqSentences28 = new Question(
 
 var wqSentences29 = new Question(
   title:
-      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleleri işaretleyiniz.",
+      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleyi işaretleyiniz.",
   side: 2,
   answer: <Answer>[
     Answer(title: "Personel Sayısı Azaldı", value: 0),
@@ -475,7 +475,7 @@ var wqSentences29 = new Question(
 
 var wqSentences30 = new Question(
   title:
-      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleleri işaretleyiniz.",
+      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleyi işaretleyiniz.",
   side: 2,
   answer: <Answer>[
     Answer(title: "Bugün Diyete Başladım", value: 1, side: 0),
@@ -491,7 +491,7 @@ var wqSentences30 = new Question(
 
 var wqSentences31 = new Question(
   title:
-      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleleri işaretleyiniz.",
+      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleyi işaretleyiniz.",
   side: 2,
   answer: <Answer>[
     Answer(title: "Uçak Seferi İptal Edildi", value: 0),
@@ -507,7 +507,7 @@ var wqSentences31 = new Question(
 
 var wqSentences32 = new Question(
   title:
-      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleleri işaretleyiniz.",
+      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleyi işaretleyiniz.",
   side: 2,
   answer: <Answer>[
     Answer(title: "Kuş Yuva Yaptı", value: 1, side: 0),
@@ -523,7 +523,7 @@ var wqSentences32 = new Question(
 
 var wqSentences33 = new Question(
   title:
-      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleleri işaretleyiniz.",
+      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleyi işaretleyiniz.",
   side: 2,
   answer: <Answer>[
     Answer(title: "Sınav Tarihi Belli Oldu", value: 1, side: 0),
@@ -539,7 +539,7 @@ var wqSentences33 = new Question(
 
 var wqSentences34 = new Question(
   title:
-      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleleri işaretleyiniz.",
+      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleyi işaretleyiniz.",
   side: 2,
   answer: <Answer>[
     Answer(title: "Zil Erken Çaldı", value: 0),
@@ -555,7 +555,7 @@ var wqSentences34 = new Question(
 
 var wqSentences35 = new Question(
   title:
-      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleleri işaretleyiniz.",
+      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleyi işaretleyiniz.",
   side: 2,
   answer: <Answer>[
     Answer(title: "Adam Gazete Okudu", value: 1, side: 1),
@@ -630,7 +630,7 @@ var mqSentences4 = new Question(
 
 var mqSentences5 = new Question(
   title:
-      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleleri işaretleyiniz.",
+      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleyi işaretleyiniz.",
   side: 2,
   answer: <Answer>[
     Answer(title: "Çocuk Süt İçti", value: 0),
@@ -931,7 +931,7 @@ var mqSentences25 = new Question(
 
 var mqSentences26 = new Question(
   title:
-      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleleri işaretleyiniz.",
+      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleyi işaretleyiniz.",
   side: 2,
   answer: <Answer>[
     Answer(title: "Sıra Sana Geldi", value: 1, side: 0),
@@ -947,7 +947,7 @@ var mqSentences26 = new Question(
 
 var mqSentences27 = new Question(
   title:
-      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleleri işaretleyiniz.",
+      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleyi işaretleyiniz.",
   side: 2,
   answer: <Answer>[
     Answer(title: "Hava Çok Soğuktu", value: 0),
@@ -963,7 +963,7 @@ var mqSentences27 = new Question(
 
 var mqSentences28 = new Question(
   title:
-      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleleri işaretleyiniz.",
+      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleyi işaretleyiniz.",
   side: 2,
   answer: <Answer>[
     Answer(title: "Sınav Yeri Belirlendi", value: 1, side: 1),
@@ -979,7 +979,7 @@ var mqSentences28 = new Question(
 
 var mqSentences29 = new Question(
   title:
-      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleleri işaretleyiniz.",
+      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleyi işaretleyiniz.",
   side: 2,
   answer: <Answer>[
     Answer(title: "Mor Bisiklet Aldı", value: 0),
@@ -995,7 +995,7 @@ var mqSentences29 = new Question(
 
 var mqSentences30 = new Question(
   title:
-      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleleri işaretleyiniz.",
+      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleyi işaretleyiniz.",
   side: 2,
   answer: <Answer>[
     Answer(title: "Genç Kız Evi Temizledi", value: 0),
@@ -1011,7 +1011,7 @@ var mqSentences30 = new Question(
 
 var mqSentences31 = new Question(
   title:
-      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleleri işaretleyiniz.",
+      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleyi işaretleyiniz.",
   side: 2,
   answer: <Answer>[
     Answer(title: "Annem Sevinçten Ağladı", value: 1, side: 1),
@@ -1027,7 +1027,7 @@ var mqSentences31 = new Question(
 
 var mqSentences32 = new Question(
   title:
-      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleleri işaretleyiniz.",
+      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleyi işaretleyiniz.",
   side: 2,
   answer: <Answer>[
     Answer(title: "Garson Yemek Getirdi", value: 0),
@@ -1043,7 +1043,7 @@ var mqSentences32 = new Question(
 
 var mqSentences33 = new Question(
   title:
-      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleleri işaretleyiniz.",
+      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleyi işaretleyiniz.",
   side: 2,
   answer: <Answer>[
     Answer(title: "Su İçmek Faydalı", value: 1, side: 1),
@@ -1059,7 +1059,7 @@ var mqSentences33 = new Question(
 
 var mqSentences34 = new Question(
   title:
-      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleleri işaretleyiniz.",
+      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleyi işaretleyiniz.",
   side: 2,
   answer: <Answer>[
     Answer(title: "Araba Ani Fren Yaptı", value: 1, side: 1),
@@ -1075,7 +1075,7 @@ var mqSentences34 = new Question(
 
 var mqSentences35 = new Question(
   title:
-      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleleri işaretleyiniz.",
+      " 'Hem sağ kulağınızdan duyduğunuz cümleyi, hem de sol kulağınızdan' duyduğunuz cümleyi işaretleyiniz.",
   side: 2,
   answer: <Answer>[
     Answer(title: "Uçak Seyahati Yaptım", value: 0),

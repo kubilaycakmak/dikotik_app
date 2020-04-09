@@ -1,7 +1,8 @@
-import 'package:audioplayers/audio_cache.dart';
-import 'package:audioplayers/audioplayers.dart';
+// import 'package:audioplayers/audio_cache.dart';
+// import 'package:audioplayers/audioplayers.dart';
 import 'package:dikotik_app/pages/style/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 
 import 'get_information_page.dart';
 import 'voice_db_set_page.dart';
@@ -15,53 +16,30 @@ class ChooseVoiceSexPage extends StatefulWidget {
 }
 
 class _ChooseVoiceSexPageState extends State<ChooseVoiceSexPage> {
-  AudioPlayer advancedPlayerWoman;
-  AudioPlayer advancedPlayerMan;
-  AudioCache audioCache = new AudioCache();
-  AudioPlayer advancedPlayer = new AudioPlayer();
-  AudioCache cacheWoman;
-  AudioCache cacheMan;
-  bool isPlay = false;
-  Duration duration;
+  // AudioPlayer advancedPlayerWoman;
+  // AudioPlayer advancedPlayerMan;
+  bool isPlay = true;
   String selectedChoiceButton = 'Kadın sesi';
+  AudioPlayer audioPlayer = AudioPlayer();
 
-  Future loadWSound() async {
-    advancedPlayerWoman = await cacheWoman.play("sound/woman/wtestSound.mp3");
+  Future loadWomanSound() async {
+    // advancedPlayerWoman = await AudioCache().play("sound/$sex/$name.mp3");
+    audioPlayer.setAsset("assets/sound/woman/wtestSound.mp3");
   }
 
-  Future loadMSound() async {
-    advancedPlayerMan = await cacheMan.play("sound/man/mtestSound.mp3");
-  }
-
-  Future loadWWordSound() async {
-    advancedPlayerWoman =
-        await cacheWoman.play("sound1/woman/35wWordSound.mp3");
-  }
-
-  Future loadMWordSound() async {
-    advancedPlayerMan = await cacheMan.play("sound1/man/35mWordSound.mp3");
-  }
-
-  Future loadWNumberSound() async {
-    advancedPlayerWoman =
-        await cacheWoman.play("sound2/woman/35wNumberSound.mp3");
-  }
-
-  Future loadMNumberSound() async {
-    advancedPlayerMan = await cacheMan.play("sound2/man/35mNumberSound.mp3");
+  Future loadManSound() async {
+    // advancedPlayerWoman = await AudioCache().play("sound/$sex/$name.mp3");
+    audioPlayer.setAsset("assets/sound/man/mtestSound.mp3");
   }
 
   @override
   void initState() {
     super.initState();
-    cacheWoman = new AudioCache(fixedPlayer: advancedPlayerWoman);
-    cacheMan = new AudioCache(fixedPlayer: advancedPlayerMan);
+    audioPlayer.setAsset("assets/sound/woman/wtestSound.mp3");
   }
 
   @override
   void dispose() {
-    advancedPlayerMan.dispose();
-    advancedPlayerWoman.dispose();
     super.dispose();
   }
 
@@ -96,50 +74,86 @@ class _ChooseVoiceSexPageState extends State<ChooseVoiceSexPage> {
             )),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: ChoiceChip(
-            backgroundColor: Colors.indigo[900],
-            selectedColor: Colors.indigo[400],
-            labelPadding: EdgeInsets.all(8.0),
-            label: Text(
-              'Kadın sesi',
-              style: paragraphText,
-            ),
-            selected: selectedChoiceButton == "Kadın sesi",
-            onSelected: (val) {
-              setState(() {
-                selectedChoiceButton = "Kadın sesi";
-                widget.testUnit == '2'
-                    ? loadWSound()
-                    : widget.testUnit == '1'
-                        ? loadWNumberSound()
-                        : loadWWordSound();
-                user.setSelectSex = 0;
-              });
-            },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              ChoiceChip(
+                avatar: Icon(
+                  Icons.volume_up,
+                  color: Colors.white,
+                ),
+                backgroundColor: Colors.indigo[900],
+                selectedColor: Colors.indigo[400],
+                labelPadding: EdgeInsets.all(8.0),
+                label: Text(
+                  'Kadın sesi',
+                  style: paragraphText,
+                ),
+                selected: selectedChoiceButton == "Kadın sesi",
+                onSelected: (val) {
+                  setState(() {
+                    isPlay = true;
+                    if (isPlay) {
+                      selectedChoiceButton = "Kadın sesi";
+                      loadWomanSound();
+                      audioPlayer.play();
+                      user.setSelectSex = 0;
+                    } else {}
+                  });
+                },
+              ),
+              Checkbox(
+                onChanged: (value) {
+                  setState(() {
+                    user.setSelectSex = 0;
+                  });
+                },
+                value: user.selectSex == 0 ? true : false,
+              )
+            ],
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: ChoiceChip(
-            selectedColor: Colors.indigo[400],
-            backgroundColor: Colors.indigo[900],
-            labelPadding: EdgeInsets.all(8.0),
-            label: Text(
-              'Erkek sesi',
-              style: paragraphText,
-            ),
-            selected: selectedChoiceButton == "Erkek sesi",
-            onSelected: (val) {
-              setState(() {
-                selectedChoiceButton = "Erkek sesi";
-                widget.testUnit == '2'
-                    ? loadMSound()
-                    : widget.testUnit == '1'
-                        ? loadMNumberSound()
-                        : loadMWordSound();
-                user.setSelectSex = 1;
-              });
-            },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              ChoiceChip(
+                avatar: Icon(
+                  Icons.volume_up,
+                  color: Colors.white,
+                ),
+                selectedColor: Colors.indigo[400],
+                backgroundColor: Colors.indigo[900],
+                labelPadding: EdgeInsets.all(8.0),
+                label: Text(
+                  'Erkek sesi',
+                  style: paragraphText,
+                ),
+                selected: selectedChoiceButton == "Erkek sesi",
+                onSelected: (val) {
+                  setState(() {
+                    isPlay = false;
+                    if (!isPlay) {
+                      selectedChoiceButton = "Erkek sesi";
+                      loadManSound();
+                      audioPlayer.play();
+                      user.setSelectSex = 1;
+                    } else {
+                      // advancedPlayerMan.dispose();
+                    }
+                  });
+                },
+              ),
+              Checkbox(
+                onChanged: (value) {
+                  setState(() {
+                    user.setSelectSex = 1;
+                  });
+                },
+                value: user.selectSex == 1 ? true : false,
+              )
+            ],
           ),
         ),
         SizedBox(
@@ -158,6 +172,7 @@ class _ChooseVoiceSexPageState extends State<ChooseVoiceSexPage> {
             onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => VoiceDbSetPage()));
+              audioPlayer.stop();
             },
           ),
         ),
