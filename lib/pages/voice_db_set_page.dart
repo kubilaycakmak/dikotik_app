@@ -2,10 +2,8 @@ import 'package:dikotik_app/pages/style/text_style.dart';
 import 'package:dikotik_app/pages/test_field_page.dart';
 import 'package:dikotik_app/pages/warning_page.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:volume/volume.dart';
-import 'package:audioplayers/audio_cache.dart';
-import 'package:audioplayers/audioplayers.dart';
-
 import 'get_information_page.dart';
 
 class VoiceDbSetPage extends StatefulWidget {
@@ -21,24 +19,25 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
   void initState() {
     super.initState();
     initPlatformState();
+    audioPlayer.setAsset("assets/sound/woman/wtestSound.mp3");
     updateVolumes();
   }
 
   @override
   void dispose() {
-    advancedPlayerWoman = null;
-    advancedPlayerMan = null;
     super.dispose();
   }
-  
 
-  AudioPlayer advancedPlayerWoman;
-  AudioPlayer advancedPlayerMan;
-  Future loadWSound() async {
-    advancedPlayerWoman = await AudioCache().play("sound/woman/wtestSound.mp3");
+  AudioPlayer audioPlayer = AudioPlayer();
+
+  Future loadWomanSound() async {
+    // advancedPlayerWoman = await AudioCache().play("sound/$sex/$name.mp3");
+    audioPlayer.setAsset("assets/sound/woman/wtestSound.mp3");
   }
-  Future loadMSound() async {
-    advancedPlayerMan = await AudioCache().play("sound/man/mtestSound.mp3");
+
+  Future loadManSound() async {
+    // advancedPlayerWoman = await AudioCache().play("sound/$sex/$name.mp3");
+    audioPlayer.setAsset("assets/sound/man/mtestSound.mp3");
   }
 
   Future<void> initPlatformState() async {
@@ -104,11 +103,12 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
               Icons.play_circle_filled,
             ),
             onPressed: () {
-              if(user.getSelectSex == 0){
-                loadWSound();
-              }
-              else{
-                loadMSound();
+              if (user.getSelectSex == 0) {
+                loadWomanSound();
+                audioPlayer.play();
+              } else {
+                loadManSound();
+                audioPlayer.play();
               }
             },
           ),
@@ -139,8 +139,12 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
                 BoxDecoration(border: Border.all(), color: Colors.indigo[900]),
             child: FlatButton(
               color: Colors.indigo[800],
-              child: Text('Devam Et', style: paragraphText,),
+              child: Text(
+                'Devam Et',
+                style: paragraphText,
+              ),
               onPressed: () {
+                audioPlayer.stop();
                 Navigator.push(
                     context,
                     MaterialPageRoute(

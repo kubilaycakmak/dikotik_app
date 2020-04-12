@@ -92,13 +92,10 @@ class _ChooseVoiceSexPageState extends State<ChooseVoiceSexPage> {
                 selected: selectedChoiceButton == "Kadın sesi",
                 onSelected: (val) {
                   setState(() {
-                    isPlay = true;
-                    if (isPlay) {
-                      selectedChoiceButton = "Kadın sesi";
-                      loadWomanSound();
-                      audioPlayer.play();
-                      user.setSelectSex = 0;
-                    } else {}
+                    selectedChoiceButton = "Kadın sesi";
+                    loadWomanSound();
+                    audioPlayer.play();
+                    user.setSelectSex = 0;
                   });
                 },
               ),
@@ -133,15 +130,10 @@ class _ChooseVoiceSexPageState extends State<ChooseVoiceSexPage> {
                 selected: selectedChoiceButton == "Erkek sesi",
                 onSelected: (val) {
                   setState(() {
-                    isPlay = false;
-                    if (!isPlay) {
-                      selectedChoiceButton = "Erkek sesi";
-                      loadManSound();
-                      audioPlayer.play();
-                      user.setSelectSex = 1;
-                    } else {
-                      // advancedPlayerMan.dispose();
-                    }
+                    selectedChoiceButton = "Erkek sesi";
+                    loadManSound();
+                    audioPlayer.play();
+                    user.setSelectSex = 1;
                   });
                 },
               ),
@@ -173,6 +165,7 @@ class _ChooseVoiceSexPageState extends State<ChooseVoiceSexPage> {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => VoiceDbSetPage()));
               audioPlayer.stop();
+              audioPlayer.dispose();
             },
           ),
         ),

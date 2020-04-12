@@ -1,7 +1,6 @@
 import 'package:dikotik_app/data/user.dart';
 import 'package:dikotik_app/pages/style/text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import 'choose_test_page.dart';
 

@@ -1,55 +1,71 @@
 import 'dart:async';
-
-import 'package:audioplayers/audio_cache.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:dikotik_app/data/question.dart';
 import 'package:dikotik_app/pages/style/text_style.dart';
-import 'package:dikotik_app/pages/test_field_page.dart';
-import 'package:flutter/material.dart';
 
 import 'get_information_page.dart';
+import 'test_field_page.dart';
 
 class TestPage extends StatefulWidget {
   final String title;
-  final Question question;
+  final question;
+  final int index;
 
-  const TestPage({Key key, this.title, this.question}) : super(key: key);
+  const TestPage({Key key, this.title, this.question, this.index})
+      : super(key: key);
 
   @override
   _TestPageState createState() => _TestPageState();
 }
 
-class _TestPageState extends State<TestPage> {
+class _TestPageState extends State<TestPage>
+    with AutomaticKeepAliveClientMixin<TestPage> {
   bool isSelected = false;
   List<Answer> selectedChoices = List();
   String selectedChoiceButton = '';
   double selectedChoiceValueButton = 0;
   bool isClicked = false;
-
-  Color colortoshow = Colors.indigoAccent;
-  Color right = Colors.green;
-  Color wrong = Colors.red;
-  int marks = 0;
-  int i = 1;
-  // extra varibale to iterate
-  int j = 1;
-  int timer = 13;
-  String showtimer = "13";
-  bool canceltimer = false;
-
-  static const timeout = const Duration(seconds: 3);
-  static const ms = const Duration(milliseconds: 1);
-
-  startTimeout([int milliseconds]) {
-    var duration = milliseconds == null ? timeout : ms * milliseconds;
-    return new Timer(duration, handleTimeout);
-  }
+  AudioPlayer audioPlayer = AudioPlayer();
+  Duration audioCount;
+  int _seconds = 16;
+  Timer _timer;
+  Duration duration = new Duration(seconds: 1);
 
   @override
   void initState() {
+    audioPlayer.setAsset(widget.question.pathAudio);
+    print(widget.question.pathAudio);
+    // audioPlayer.setAsset(widget.question.pathAudio);
+    timer();
     super.initState();
-    // startTimeout(12000);
-    starttimer();
+  }
+
+  void nextQuestion() {
+    _seconds = 16;
+    controller.nextPage(duration: Duration(seconds: 1), curve: Curves.ease);
+    timer();
+  }
+
+  void timer() async {
+    _timer = Timer.periodic(
+      duration,
+      (Timer timer) {
+        setState(() {
+          if (_seconds == 13) {
+            audioPlayer.play();
+          }
+          if (_seconds < 1) {
+            timer.cancel();
+            nextQuestion();
+          } else {
+            setState(() {
+              _seconds -= 1;
+            });
+          }
+        });
+      },
+    );
   }
 
   @override
@@ -59,76 +75,29 @@ class _TestPageState extends State<TestPage> {
     }
   }
 
-  void starttimer() async {
-    const onesec = Duration(seconds: 1);
-    Timer.periodic(onesec, (Timer t) {
-      setState(() {
-        if (timer == 11) {
-          loadMusic();
-        }
-        if (timer < 1) {
-          t.cancel();
-          nextquestion();
-        } else if (canceltimer == true) {
-          t.cancel();
-        } else {
-          timer = timer - 1;
-        }
-        showtimer = timer.toString();
-      });
-    });
-  }
+  Text _buildCountDown(BuildContext context) {
+    int seconds = _seconds;
+    String secondsString = seconds.toString().padLeft(2, '0');
 
-  void nextquestion() {
-    canceltimer = false;
-    timer = 13;
-    controller.nextPage(
-        duration: Duration(milliseconds: 500), curve: Curves.easeIn);
-    starttimer();
-  }
-
-  AudioPlayer advancedPlayer;
-  Future loadMusic() async {
-    advancedPlayer = await AudioCache().play(widget.question.pathAudio);
-  }
-
-  handleTimeout() {
-    return showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.black38,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-              side: BorderSide(color: Color.fromRGBO(0, 40, 77, 1), width: 2)),
-          title: Column(
-            children: <Widget>[
-              Text(
-                'Sure bitti',
-                style: TextStyle(color: Colors.white),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              RaisedButton(
-                onPressed: () {
-                  controller.nextPage(
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.easeIn);
-                  Navigator.pop(context);
-                },
-                child: Text('Sonraki soru'),
-              )
-            ],
-          ),
-        );
-      },
+    return Text(
+      'Süre : $secondsString',
+      style: TextStyle(
+          color: Colors.red, fontSize: 18, fontWeight: FontWeight.bold),
     );
   }
 
   @override
+  void dispose() {
+    print('sayfadan cikti');
+    super.dispose();
+    print('sayfadan cikti');
+    _timer.cancel();
+    audioPlayer.pause();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60),
@@ -195,7 +164,7 @@ class _TestPageState extends State<TestPage> {
                             decoration: BoxDecoration(
                                 border: Border.all(),
                                 color: selectedChoices
-                                        .contains(widget.question.answer[index])
+                                        .contains(widget.question.answer)
                                     ? Colors.indigo[900]
                                     : Colors.white),
                             child: ChoiceChip(
@@ -258,9 +227,7 @@ class _TestPageState extends State<TestPage> {
                               ),
                               onPressed: () {
                                 setState(() {
-                                  setState(() {
-                                    isClicked = true;
-                                  });
+                                  isClicked = true;
                                   selectedChoiceButton =
                                       widget.question.answer[index].title;
                                   selectedChoiceValueButton =
@@ -276,14 +243,15 @@ class _TestPageState extends State<TestPage> {
         SizedBox(
           height: 10,
         ),
-        Text(
-          showtimer,
-          style: TextStyle(
-            fontSize: 35.0,
-            fontWeight: FontWeight.w700,
-            fontFamily: 'Times New Roman',
-          ),
-        ),
+        _buildCountDown(context),
+        // Text(
+        //   showtimer,
+        //   style: TextStyle(
+        //     fontSize: 35.0,
+        //     fontWeight: FontWeight.w700,
+        //     fontFamily: 'Times New Roman',
+        //   ),
+        // ),
         Container(
           width: 250,
           decoration:
@@ -298,10 +266,7 @@ class _TestPageState extends State<TestPage> {
                 ? null
                 : widget.title == 'DİKKATLİCE  DİNLEYİN '
                     ? () {
-                        controller.nextPage(
-                            duration: Duration(milliseconds: 500),
-                            curve: Curves.easeIn);
-
+                        nextQuestion();
                         print('===============================');
                         print('both left score : ${user.getBothLeftScore}');
                         print('both right score : ${user.getBothRightScore}');
@@ -309,51 +274,53 @@ class _TestPageState extends State<TestPage> {
                         print('right score : ${user.getRightScore}');
                       }
                     : () {
-                        setState(() {
-                          if (widget.question.side == 0) {
-                            if (selectedChoiceValueButton == 1.0) {
-                              user.setLeftScore = user.getLeftScore + 10.0;
-                            }
-                          } else if (widget.question.side == 1) {
-                            if (selectedChoiceValueButton == 1.0) {
-                              user.setRightScore = user.getRightScore + 10.0;
-                            }
+                        if (widget.question.side == 0) {
+                          if (selectedChoiceValueButton == 1.0) {
+                            user.setLeftScore = user.getLeftScore + 10.0;
                           }
-                          if (widget.question.side == 2) {
-                            if (selectedChoices.length >= 1) {
-                              if (selectedChoices[0].value == 1) {
-                                if (selectedChoices[0].side == 0) {
-                                  user.setBothLeftScore =
-                                      user.getBothLeftScore + 10.0;
-                                } else {
-                                  user.setBothRightScore =
-                                      user.getBothRightScore + 10.0;
-                                }
+                        } else if (widget.question.side == 1) {
+                          if (selectedChoiceValueButton == 1.0) {
+                            user.setRightScore = user.getRightScore + 10.0;
+                          }
+                        }
+                        if (widget.question.side == 2) {
+                          if (selectedChoices.length >= 1) {
+                            if (selectedChoices[0].value == 1) {
+                              if (selectedChoices[0].side == 0) {
+                                user.setBothLeftScore =
+                                    user.getBothLeftScore + 10.0;
+                              } else {
+                                user.setBothRightScore =
+                                    user.getBothRightScore + 10.0;
                               }
-                              if (selectedChoices[1].value == 1) {
-                                if (selectedChoices[1].side == 0) {
-                                  user.setBothLeftScore =
-                                      user.getBothLeftScore + 10.0;
-                                } else {
-                                  user.setBothRightScore =
-                                      user.getBothRightScore + 10.0;
-                                }
+                            }
+                            if (selectedChoices[1].value == 1) {
+                              if (selectedChoices[1].side == 0) {
+                                user.setBothLeftScore =
+                                    user.getBothLeftScore + 10.0;
+                              } else {
+                                user.setBothRightScore =
+                                    user.getBothRightScore + 10.0;
                               }
                             }
                           }
-                          controller.nextPage(
-                              duration: Duration(milliseconds: 500),
-                              curve: Curves.easeIn);
-                          print('===============================');
-                          print('both left score : ${user.getBothLeftScore}');
-                          print('both right score : ${user.getBothRightScore}');
-                          print('left score : ${user.getLeftScore}');
-                          print('right score : ${user.getRightScore}');
-                        });
+                        }
+                        nextQuestion();
+                        // controller.nextPage(
+                        //     duration: Duration(milliseconds: 500),
+                        //     curve: Curves.easeIn);
+                        print('===============================');
+                        print('both left score : ${user.getBothLeftScore}');
+                        print('both right score : ${user.getBothRightScore}');
+                        print('left score : ${user.getLeftScore}');
+                        print('right score : ${user.getRightScore}');
                       },
           ),
         ),
       ],
     );
   }
+
+  @override
+  bool get wantKeepAlive => false;
 }

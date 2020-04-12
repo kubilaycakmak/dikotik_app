@@ -7,9 +7,7 @@ import 'package:flutter/material.dart';
 import 'get_information_page.dart';
 import 'result_page.dart';
 
-PageController controller = PageController(
-  initialPage: 0,
-);
+PageController controller = PageController(initialPage: 0, keepPage: false);
 
 class TestFieldPage extends StatefulWidget {
   @override
@@ -18,16 +16,15 @@ class TestFieldPage extends StatefulWidget {
 
 class _TestFieldPageState extends State<TestFieldPage> {
   @override
-  void setState(fn) {
-    if (mounted) {
-      super.setState(fn);
-    }
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return PageView(
-      scrollDirection: Axis.vertical,
+      scrollDirection: Axis.horizontal,
       controller: controller,
       physics: NeverScrollableScrollPhysics(),
       children: user.getSelectText == '2'
@@ -43,48 +40,37 @@ class _TestFieldPageState extends State<TestFieldPage> {
   List<Widget> listManNumber() {
     return <Widget>[
       WarningPage(
-          title: 'Bilgilendirme',
+          title: 'BİLGİLENDİRME',
+          desc:
+              'Kulaklığınızı sağ ve sol kulak olarak taktıgınızdan emin olunuz.',
+          desc2: Center()),
+      WarningPage(
+          title: 'BİLGİLENDİRME',
           desc:
               'Bu test 35 sorudan oluşmaktadır. İlk 5 soru kullanıcıların teste alışması için oluşturulmuştur. '
               'Testte her iki kulağınıza aynı anda sayılar gelecek olup sizden sadece verilen yönlendirmelere göre doğru sayı seçimi yapılması istenmektedir.',
           desc2: Center()),
       WarningPage(
-        title: 'Bilgilendirme',
+        title: 'BİLGİLENDİRME',
         desc: '',
         desc2: Center(
           child: RichText(
             textAlign: TextAlign.center,
             text: TextSpan(children: <TextSpan>[
               TextSpan(
-                  text: 'Verilecek yönlendirmeler şu şekildedir: ',
+                  text:
+                      'Test sırasında aynı anda her iki kulağınıza sayılar gelecek. Sizden,',
                   style: TextStyle(color: Colors.black, fontSize: 18)),
               TextSpan(
-                  text: '\n\n1) Aynı anda iki kulağınıza sayı gelirken sizden ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
-              TextSpan(
-                  text: 'sadece sol kulağınızdan ',
+                  text: '\n\n1) Sadece sağ kulağınızdan duyduğunuz sayıyı',
                   style: TextStyle(color: Colors.red, fontSize: 18)),
               TextSpan(
-                  text: 'duyduğunuz sayıyı dikkat edip seçmeniz istenecektir. ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
-              TextSpan(
-                  text: '\n\n2) Aynı anda iki kulağınıza sayı gelirken ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
-              TextSpan(
-                  text: 'sadece sağ kulağınızdan ',
+                  text: '\n\n2) Sadece sol kulağınızdan duyduğunuz sayıyı',
                   style: TextStyle(color: Colors.red, fontSize: 18)),
               TextSpan(
-                  text: 'duyduğunuz sayıyı dikkat edip seçmeniz istenecektir. ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
-              TextSpan(
-                  text: '\n\n3) Son olarak ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
-              TextSpan(
-                  text: 'hem sağ hem sol kulağınızdan ',
+                  text:
+                      '\n\n3) Her iki kulağınızdan duyduğunuz sayıları seçmeniz istenecektir.',
                   style: TextStyle(color: Colors.red, fontSize: 18)),
-              TextSpan(
-                  text: 'duyduğunuz sayıyı seçmeniz olacaktır. ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
             ]),
           ),
         ),
@@ -253,48 +239,37 @@ class _TestFieldPageState extends State<TestFieldPage> {
   List<Widget> listWomanNumber() {
     return <Widget>[
       WarningPage(
-          title: 'Bilgilendirme',
+          title: 'BİLGİLENDİRME',
+          desc:
+              'Kulaklığınızı sağ ve sol kulak olarak taktıgınızdan emin olunuz.',
+          desc2: Center()),
+      WarningPage(
+          title: 'BİLGİLENDİRME',
           desc:
               'Bu test 35 sorudan oluşmaktadır. İlk 5 soru kullanıcıların teste alışması için oluşturulmuştur. '
               'Testte her iki kulağınıza aynı anda sayılar gelecek olup sizden sadece verilen yönlendirmelere göre doğru sayı seçimi yapılması istenmektedir.',
           desc2: Center()),
       WarningPage(
-        title: 'Bilgilendirme',
+        title: 'BİLGİLENDİRME',
         desc: '',
         desc2: Center(
           child: RichText(
             textAlign: TextAlign.center,
             text: TextSpan(children: <TextSpan>[
               TextSpan(
-                  text: 'Verilecek yönlendirmeler şu şekildedir: ',
+                  text:
+                      'Test sırasında aynı anda her iki kulağınıza sayılar gelecek. Sizden,',
                   style: TextStyle(color: Colors.black, fontSize: 18)),
               TextSpan(
-                  text: '\n\n1) Aynı anda iki kulağınıza sayı gelirken sizden ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
-              TextSpan(
-                  text: 'sadece sol kulağınızdan ',
+                  text: '\n\n1) Sadece sağ kulağınızdan duyduğunuz sayıyı',
                   style: TextStyle(color: Colors.red, fontSize: 18)),
               TextSpan(
-                  text: 'duyduğunuz sayıyı dikkat edip seçmeniz istenecektir. ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
-              TextSpan(
-                  text: '\n\n2) Aynı anda iki kulağınıza sayı gelirken ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
-              TextSpan(
-                  text: 'sadece sağ kulağınızdan ',
+                  text: '\n\n2) Sadece sol kulağınızdan duyduğunuz sayıyı',
                   style: TextStyle(color: Colors.red, fontSize: 18)),
               TextSpan(
-                  text: 'duyduğunuz sayıyı dikkat edip seçmeniz istenecektir. ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
-              TextSpan(
-                  text: '\n\n3) Son olarak ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
-              TextSpan(
-                  text: 'hem sağ hem sol kulağınızdan ',
+                  text:
+                      '\n\n3) Her iki kulağınızdan duyduğunuz sayıları seçmeniz istenecektir.',
                   style: TextStyle(color: Colors.red, fontSize: 18)),
-              TextSpan(
-                  text: 'duyduğunuz sayıyı seçmeniz olacaktır. ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
             ]),
           ),
         ),
@@ -320,8 +295,8 @@ class _TestFieldPageState extends State<TestFieldPage> {
         question: wqNumber5,
       ),
       WarningPage(
-        title: 'TEST',
-        desc: 'Dikotik testine başlıyoruz',
+        title: 'BİLGİLENDİRME',
+        desc: 'Bu testte SOL kulağınızdan duyduğunuz sayıyı seçiniz.',
         desc2: Center(),
       ),
       TestPage(
@@ -364,6 +339,11 @@ class _TestFieldPageState extends State<TestFieldPage> {
         title: 'DİKKATLİCE  DİNLEYİN',
         question: wqNumber15,
       ),
+      WarningPage(
+        title: 'BİLGİLENDİRME',
+        desc: 'Bu testte SAĞ kulağınızdan duyduğunuz sayıyı seçiniz.',
+        desc2: Center(),
+      ),
       TestPage(
         title: 'DİKKATLİCE  DİNLEYİN',
         question: wqNumber16,
@@ -403,6 +383,11 @@ class _TestFieldPageState extends State<TestFieldPage> {
       TestPage(
         title: 'DİKKATLİCE  DİNLEYİN',
         question: wqNumber25,
+      ),
+      WarningPage(
+        title: 'BİLGİLENDİRME',
+        desc: 'Bu testte HER İKİ kulağınızdan duyduğunuz sayıyı seçiniz.',
+        desc2: Center(),
       ),
       TestPage(
         title: 'DİKKATLİCE  DİNLEYİN',
@@ -463,51 +448,56 @@ class _TestFieldPageState extends State<TestFieldPage> {
   List<Widget> listManSentences() {
     return <Widget>[
       WarningPage(
-          title: 'Bilgilendirme',
+          title: 'BİLGİLENDİRME',
+          desc:
+              'Kulaklığınızı sağ ve sol kulak olarak taktıgınızdan emin olunuz.',
+          desc2: Center()),
+      WarningPage(
+          title: 'BİLGİLENDİRME',
           desc:
               'Bu test 35 sorudan oluşmaktadır. İlk 5 soru kullanıcıların teste alışması için oluşturulmuştur. '
               'Testte her iki kulağınıza aynı anda cümleler gelecek olup sizden sadece verilen yönlendirmelere göre doğru cümle seçimi yapılması istenmektedir.',
           desc2: Center()),
       WarningPage(
-        title: 'Bilgilendirme',
+        title: 'BİLGİLENDİRME',
         desc: '',
         desc2: Center(
           child: RichText(
             textAlign: TextAlign.center,
             text: TextSpan(children: <TextSpan>[
               TextSpan(
-                  text: 'Verilecek yönlendirmeler şu şekildedir: ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
-              TextSpan(
                   text:
-                      '\n\n1) Aynı anda iki kulağınıza cümle gelirken sizden ',
+                      'Test sırasında aynı anda her iki kulağınıza cümleler gelecek. Sizden,',
                   style: TextStyle(color: Colors.black, fontSize: 18)),
               TextSpan(
-                  text: 'sadece sol kulağınızdan ',
+                  text: '\n\n1) Sadece sağ kulağınızdan duyduğunuz cümleyi',
+                  style: TextStyle(color: Colors.red, fontSize: 18)),
+              TextSpan(
+                  text: '\n\n2) Sadece sol kulağınızdan duyduğunuz cümleyi',
                   style: TextStyle(color: Colors.red, fontSize: 18)),
               TextSpan(
                   text:
-                      'duyduğunuz cümleyi dikkat edip seçmeniz istenecektir. ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
-              TextSpan(
-                  text: '\n\n2) Aynı anda iki kulağınıza cümle gelirken ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
-              TextSpan(
-                  text: 'sadece sağ kulağınızdan ',
+                      '\n\n3) Her iki kulağınızdan duyduğunuz cümleleri seçmeniz istenecektir.',
                   style: TextStyle(color: Colors.red, fontSize: 18)),
-              TextSpan(
-                  text:
-                      'duyduğunuz cümleyi dikkat edip seçmeniz istenecektir. ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
-              TextSpan(
-                  text: '\n\n3) Son olarak ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
-              TextSpan(
-                  text: 'hem sağ hem sol kulağınızdan ',
-                  style: TextStyle(color: Colors.red, fontSize: 18)),
-              TextSpan(
-                  text: 'duyduğunuz cümleyi seçmeniz olacaktır. ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
+              // TextSpan(
+              //     text: '\n\n2) Aynı anda iki kulağınıza cümle gelirken ',
+              //     style: TextStyle(color: Colors.black, fontSize: 18)),
+              // TextSpan(
+              //     text: 'sadece sağ kulağınızdan ',
+              //     style: TextStyle(color: Colors.red, fontSize: 18)),
+              // TextSpan(
+              //     text:
+              //         'duyduğunuz cümleyi dikkat edip seçmeniz istenecektir. ',
+              //     style: TextStyle(color: Colors.black, fontSize: 18)),
+              // TextSpan(
+              //     text: '\n\n3) Son olarak ',
+              //     style: TextStyle(color: Colors.black, fontSize: 18)),
+              // TextSpan(
+              //     text: 'hem sağ hem sol kulağınızdan ',
+              //     style: TextStyle(color: Colors.red, fontSize: 18)),
+              // TextSpan(
+              //     text: 'duyduğunuz cümleyi seçmeniz olacaktır. ',
+              //     style: TextStyle(color: Colors.black, fontSize: 18)),
             ]),
           ),
         ),
@@ -533,8 +523,8 @@ class _TestFieldPageState extends State<TestFieldPage> {
         question: mqSentences5,
       ),
       WarningPage(
-        title: 'TEST',
-        desc: 'Dikotik testine başlıyoruz',
+        title: 'BİLGİLENDİRME',
+        desc: 'Bu testte SOL kulağınızdan duyduğunuz cümleyi seçiniz.',
         desc2: Center(),
       ),
       TestPage(
@@ -577,6 +567,11 @@ class _TestFieldPageState extends State<TestFieldPage> {
         title: 'DİKKATLİCE  DİNLEYİN',
         question: mqSentences15,
       ),
+      WarningPage(
+        title: 'BİLGİLENDİRME',
+        desc: 'Bu testte SAĞ kulağınızdan duyduğunuz cümleyi seçiniz.',
+        desc2: Center(),
+      ),
       TestPage(
         title: 'DİKKATLİCE  DİNLEYİN',
         question: mqSentences16,
@@ -616,6 +611,11 @@ class _TestFieldPageState extends State<TestFieldPage> {
       TestPage(
         title: 'DİKKATLİCE  DİNLEYİN',
         question: mqSentences25,
+      ),
+      WarningPage(
+        title: 'BİLGİLENDİRME',
+        desc: 'Bu testte HER İKİ Kulağınızdan duyduğunuz cümleyi seçiniz.',
+        desc2: Center(),
       ),
       TestPage(
         title: 'DİKKATLİCE  DİNLEYİN',
@@ -676,50 +676,37 @@ class _TestFieldPageState extends State<TestFieldPage> {
   List<Widget> listWomanSentences() {
     return <Widget>[
       WarningPage(
-          title: 'Bilgilendirme',
+          title: 'BİLGİLENDİRME',
+          desc:
+              'Kulaklığınızı sağ ve sol kulak olarak taktıgınızdan emin olunuz.',
+          desc2: Center()),
+      WarningPage(
+          title: 'BİLGİLENDİRME',
           desc:
               'Bu test 35 sorudan oluşmaktadır. İlk 5 soru kullanıcıların teste alışması için oluşturulmuştur. '
               'Testte her iki kulağınıza aynı anda cümleler gelecek olup sizden sadece verilen yönlendirmelere göre doğru cümle seçimi yapılması istenmektedir.',
           desc2: Center()),
       WarningPage(
-        title: 'Bilgilendirme',
+        title: 'BİLGİLENDİRME',
         desc: '',
         desc2: Center(
           child: RichText(
             textAlign: TextAlign.center,
             text: TextSpan(children: <TextSpan>[
               TextSpan(
-                  text: 'Verilecek yönlendirmeler şu şekildedir: ',
+                  text:
+                      'Test sırasında aynı anda her iki kulağınıza cümleler gelecek. Sizden,',
                   style: TextStyle(color: Colors.black, fontSize: 18)),
               TextSpan(
-                  text: '\n1) Aynı anda iki kulağınıza cümle gelirken sizden ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
+                  text: '\n\n1) Sadece sağ kulağınızdan duyduğunuz cümleyi',
+                  style: TextStyle(color: Colors.red, fontSize: 18)),
               TextSpan(
-                  text: 'sadece sol kulağınızdan ',
+                  text: '\n\n2) Sadece sol kulağınızdan duyduğunuz cümleyi',
                   style: TextStyle(color: Colors.red, fontSize: 18)),
               TextSpan(
                   text:
-                      'duyduğunuz cümleyi dikkat edip seçmeniz istenecektir. ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
-              TextSpan(
-                  text: '\n\n2) Aynı anda iki kulağınıza cümle gelirken ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
-              TextSpan(
-                  text: 'sadece sağ kulağınızdan ',
+                      '\n\n3) Her iki kulağınızdan duyduğunuz cümleleri seçmeniz istenecektir.',
                   style: TextStyle(color: Colors.red, fontSize: 18)),
-              TextSpan(
-                  text:
-                      'duyduğunuz cümleyi dikkat edip seçmeniz istenecektir. ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
-              TextSpan(
-                  text: '\n\n3) Son olarak ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
-              TextSpan(
-                  text: 'hem sağ hem sol kulağınızdan ',
-                  style: TextStyle(color: Colors.red, fontSize: 18)),
-              TextSpan(
-                  text: 'duyduğunuz cümleyi seçmeniz olacaktır. ',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
             ]),
           ),
         ),
@@ -745,8 +732,8 @@ class _TestFieldPageState extends State<TestFieldPage> {
         question: wqSentences5,
       ),
       WarningPage(
-        title: 'UYARI',
-        desc: 'DİKOTİK CÜMLE TANIMLAMA TESTİ’ NE BAŞLIYORUZ.',
+        title: 'BİLGİLENDİRME',
+        desc: 'Bu testte SOL kulağınızdan duyduğunuz cümleyi seçiniz.',
         desc2: Center(),
       ),
       TestPage(
@@ -789,6 +776,11 @@ class _TestFieldPageState extends State<TestFieldPage> {
         title: 'DİKKATLİCE  DİNLEYİN',
         question: wqSentences15,
       ),
+      WarningPage(
+        title: 'BİLGİLENDİRME',
+        desc: 'Bu testte SAĞ kulağınızdan duyduğunuz cümleyi seçiniz.',
+        desc2: Center(),
+      ),
       TestPage(
         title: 'DİKKATLİCE  DİNLEYİN',
         question: wqSentences16,
@@ -828,6 +820,11 @@ class _TestFieldPageState extends State<TestFieldPage> {
       TestPage(
         title: 'DİKKATLİCE  DİNLEYİN',
         question: wqSentences25,
+      ),
+      WarningPage(
+        title: 'BİLGİLENDİRME',
+        desc: 'Bu testte HER İKİ kulağınızdan duyduğunuz cümleyi seçiniz.',
+        desc2: Center(),
       ),
       TestPage(
         title: 'DİKKATLİCE  DİNLEYİN',
@@ -889,48 +886,37 @@ class _TestFieldPageState extends State<TestFieldPage> {
 List<Widget> listManWord() {
   return <Widget>[
     WarningPage(
-        title: 'Bilgilendirme',
+        title: 'BİLGİLENDİRME',
+        desc:
+            'Kulaklığınızı sağ ve sol kulak olarak taktıgınızdan emin olunuz.',
+        desc2: Center()),
+    WarningPage(
+        title: 'BİLGİLENDİRME',
         desc:
             'Bu test 35 sorudan oluşmaktadır. İlk 5 soru kullanıcıların teste alışması için oluşturulmuştur. '
             'Testte her iki kulağınıza aynı anda kelimeler gelecek olup sizden sadece verilen yönlendirmelere göre doğru kelime seçimi yapılması istenmektedir.',
         desc2: Center()),
     WarningPage(
-      title: 'Bilgilendirme',
+      title: 'BİLGİLENDİRME',
       desc: '',
       desc2: Center(
         child: RichText(
           textAlign: TextAlign.center,
           text: TextSpan(children: <TextSpan>[
             TextSpan(
-                text: 'Verilecek yönlendirmeler şu şekildedir: ',
+                text:
+                    'Test sırasında aynı anda her iki kulağınıza kelimeler gelecek. Sizden,',
                 style: TextStyle(color: Colors.black, fontSize: 18)),
             TextSpan(
-                text: '\n1) Aynı anda iki kulağınıza kelime gelirken sizden ',
-                style: TextStyle(color: Colors.black, fontSize: 18)),
-            TextSpan(
-                text: 'sadece sol kulağınızdan ',
+                text: '\n\n1) Sadece sağ kulağınızdan duyduğunuz kelimeyi',
                 style: TextStyle(color: Colors.red, fontSize: 18)),
             TextSpan(
-                text: 'duyduğunuz kelimeyi dikkat edip seçmeniz istenecektir. ',
-                style: TextStyle(color: Colors.black, fontSize: 18)),
-            TextSpan(
-                text: '\n\n2) Aynı anda iki kulağınıza kelime gelirken ',
-                style: TextStyle(color: Colors.black, fontSize: 18)),
-            TextSpan(
-                text: 'sadece sağ kulağınızdan ',
+                text: '\n\n2) Sadece sol kulağınızdan duyduğunuz kelimeyi',
                 style: TextStyle(color: Colors.red, fontSize: 18)),
             TextSpan(
-                text: 'duyduğunuz kelimeyi dikkat edip seçmeniz istenecektir. ',
-                style: TextStyle(color: Colors.black, fontSize: 18)),
-            TextSpan(
-                text: '\n\n3) Son olarak ',
-                style: TextStyle(color: Colors.black, fontSize: 18)),
-            TextSpan(
-                text: 'hem sağ hem sol kulağınızdan ',
+                text:
+                    '\n\n3) Her iki kulağınızdan duyduğunuz kelimeleri seçmeniz istenecektir.',
                 style: TextStyle(color: Colors.red, fontSize: 18)),
-            TextSpan(
-                text: 'duyduğunuz kelimeyi seçmeniz olacaktır. ',
-                style: TextStyle(color: Colors.black, fontSize: 18)),
           ]),
         ),
       ),
@@ -956,8 +942,8 @@ List<Widget> listManWord() {
       question: mqWord5,
     ),
     WarningPage(
-      title: 'TEST',
-      desc: 'Dikotik testine başlıyoruz',
+      title: 'BİLGİLENDİRME',
+      desc: 'Bu testte SOL kulağınızdan duyduğunuz kelimeyi seçiniz.',
       desc2: Center(),
     ),
     TestPage(
@@ -1000,6 +986,11 @@ List<Widget> listManWord() {
       title: 'DİKKATLİCE  DİNLEYİN',
       question: mqWord15,
     ),
+    WarningPage(
+      title: 'BİLGİLENDİRME',
+      desc: 'Bu testte SAĞ kulağınızdan duyduğunuz kelimeyi seçiniz.',
+      desc2: Center(),
+    ),
     TestPage(
       title: 'DİKKATLİCE  DİNLEYİN',
       question: mqWord16,
@@ -1039,6 +1030,11 @@ List<Widget> listManWord() {
     TestPage(
       title: 'DİKKATLİCE  DİNLEYİN',
       question: mqWord25,
+    ),
+    WarningPage(
+      title: 'BİLGİLENDİRME',
+      desc: 'Bu testte HER İKİ kulağınızdan duyduğunuz kelimeyi seçiniz.',
+      desc2: Center(),
     ),
     TestPage(
       title: 'DİKKATLİCE  DİNLEYİN',
@@ -1099,48 +1095,37 @@ List<Widget> listManWord() {
 List<Widget> listWomanWord() {
   return <Widget>[
     WarningPage(
-        title: 'Bilgilendirme',
+        title: 'BİLGİLENDİRME',
+        desc:
+            'Kulaklığınızı sağ ve sol kulak olarak taktıgınızdan emin olunuz.',
+        desc2: Center()),
+    WarningPage(
+        title: 'BİLGİLENDİRME',
         desc:
             'Bu test 35 sorudan oluşmaktadır. İlk 5 soru kullanıcıların teste alışması için oluşturulmuştur. '
             'Testte her iki kulağınıza aynı anda kelimeler gelecek olup sizden sadece verilen yönlendirmelere göre doğru kelime seçimi yapılması istenmektedir.',
         desc2: Center()),
     WarningPage(
-      title: 'Bilgilendirme',
+      title: 'BİLGİLENDİRME',
       desc: '',
       desc2: Center(
         child: RichText(
           textAlign: TextAlign.center,
           text: TextSpan(children: <TextSpan>[
             TextSpan(
-                text: 'Verilecek yönlendirmeler şu şekildedir: ',
+                text:
+                    'Test sırasında aynı anda her iki kulağınıza kelimeler gelecek. Sizden,',
                 style: TextStyle(color: Colors.black, fontSize: 18)),
             TextSpan(
-                text: '\n1) Aynı anda iki kulağınıza kelime gelirken sizden ',
-                style: TextStyle(color: Colors.black, fontSize: 18)),
-            TextSpan(
-                text: 'sadece sol kulağınızdan ',
+                text: '\n\n1) Sadece sağ kulağınızdan duyduğunuz kelimeyi',
                 style: TextStyle(color: Colors.red, fontSize: 18)),
             TextSpan(
-                text: 'duyduğunuz kelimeyi dikkat edip seçmeniz istenecektir. ',
-                style: TextStyle(color: Colors.black, fontSize: 18)),
-            TextSpan(
-                text: '\n\n2) Aynı anda iki kulağınıza kelime gelirken ',
-                style: TextStyle(color: Colors.black, fontSize: 18)),
-            TextSpan(
-                text: 'sadece sağ kulağınızdan ',
+                text: '\n\n2) Sadece sol kulağınızdan duyduğunuz kelimeyi',
                 style: TextStyle(color: Colors.red, fontSize: 18)),
             TextSpan(
-                text: 'duyduğunuz kelimeyi dikkat edip seçmeniz istenecektir. ',
-                style: TextStyle(color: Colors.black, fontSize: 18)),
-            TextSpan(
-                text: '\n\n3) Son olarak ',
-                style: TextStyle(color: Colors.black, fontSize: 18)),
-            TextSpan(
-                text: 'hem sağ hem sol kulağınızdan ',
+                text:
+                    '\n\n3) Her iki kulağınızdan duyduğunuz kelimeleri seçmeniz istenecektir.',
                 style: TextStyle(color: Colors.red, fontSize: 18)),
-            TextSpan(
-                text: 'duyduğunuz kelimeyi seçmeniz olacaktır. ',
-                style: TextStyle(color: Colors.black, fontSize: 18)),
           ]),
         ),
       ),
@@ -1166,8 +1151,8 @@ List<Widget> listWomanWord() {
       question: wqWord5,
     ),
     WarningPage(
-      title: 'TEST',
-      desc: 'Dikotik testine başlıyoruz',
+      title: 'BİLGİLENDİRME',
+      desc: 'Bu testte SOL kulağınızdan duyduğunuz kelimeyi seçiniz.',
       desc2: Center(),
     ),
     TestPage(
@@ -1210,6 +1195,11 @@ List<Widget> listWomanWord() {
       title: 'DİKKATLİCE  DİNLEYİN',
       question: wqWord15,
     ),
+    WarningPage(
+      title: 'BİLGİLENDİRME',
+      desc: 'Bu testte SAĞ kulağınızdan duyduğunuz kelimeyi seçiniz.',
+      desc2: Center(),
+    ),
     TestPage(
       title: 'DİKKATLİCE  DİNLEYİN',
       question: wqWord16,
@@ -1249,6 +1239,11 @@ List<Widget> listWomanWord() {
     TestPage(
       title: 'DİKKATLİCE  DİNLEYİN',
       question: wqWord25,
+    ),
+    WarningPage(
+      title: 'BİLGİLENDİRME',
+      desc: 'Bu testte HER İKİ kulağınızdan duyduğunuz kelimeyi seçiniz.',
+      desc2: Center(),
     ),
     TestPage(
       title: 'DİKKATLİCE  DİNLEYİN',

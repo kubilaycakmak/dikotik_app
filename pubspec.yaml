@@ -20,12 +20,11 @@ dependencies:
   flutter:
     sdk: flutter
   path_provider: ^1.6.5
-  audioplayers: ^0.14.2
   intl: ^0.15.8
+  timer_count_down: ^1.0.1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   volume: ^0.1.0
-  stereo: ^1.0.2
   just_audio: ^0.1.4
 
 dev_dependencies:

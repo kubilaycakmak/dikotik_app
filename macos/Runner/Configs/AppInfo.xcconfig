@@ -11,4 +11,4 @@ PRODUCT_NAME = dikotik_app
 PRODUCT_BUNDLE_IDENTIFIER = com.kubilaycakmak.dikotikapp.dikotikApp
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2020 com.kubilaycakmak.dikotik_app. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2020 com.kubilaycakmak.dikotikapp. All rights reserved.

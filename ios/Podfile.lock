@@ -1,0 +1,46 @@
+PODS:
+  - Flutter (1.0.0)
+  - just_audio (0.0.1):
+    - Flutter
+  - path_provider (0.0.1):
+    - Flutter
+  - path_provider_macos (0.0.1):
+    - Flutter
+  - system_shortcuts (0.0.1):
+    - Flutter
+  - volume (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - just_audio (from `.symlinks/plugins/just_audio/ios`)
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - path_provider_macos (from `.symlinks/plugins/path_provider_macos/ios`)
+  - system_shortcuts (from `.symlinks/plugins/system_shortcuts/ios`)
+  - volume (from `.symlinks/plugins/volume/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  just_audio:
+    :path: ".symlinks/plugins/just_audio/ios"
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
+  path_provider_macos:
+    :path: ".symlinks/plugins/path_provider_macos/ios"
+  system_shortcuts:
+    :path: ".symlinks/plugins/system_shortcuts/ios"
+  volume:
+    :path: ".symlinks/plugins/volume/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  just_audio: baa7252489dbcf47a4c7cc9ca663e9661c99aafa
+  path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
+  path_provider_macos: f760a3c5b04357c380e2fddb6f9db6f3015897e0
+  system_shortcuts: fa91743cc51eed3811f5ea5461e23f972b9de780
+  volume: 8f8b305a8187ed55c4ee48bda614b8129c47f38e
+
+PODFILE CHECKSUM: c34e2287a9ccaa606aeceab922830efb9a6ff69a
+
+COCOAPODS: 1.8.4
