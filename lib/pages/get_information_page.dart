@@ -147,11 +147,15 @@ class _GetInformationPageState extends State<GetInformationPage> {
                   height: 20,
                 ),
                 Container(
-                  width: 250,
+                  width: 300,
                   decoration: BoxDecoration(
                       border: Border.all(), color: Colors.indigo[900]),
                   child: FlatButton(
-                    color: Colors.indigo[800],
+                    focusColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            color: Colors.indigo[900],
                     onPressed: () {
                       print(c1.text);
                       user = new User(

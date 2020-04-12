@@ -152,11 +152,11 @@ class _ChooseVoiceSexPageState extends State<ChooseVoiceSexPage> {
           height: 20,
         ),
         Container(
-          width: 250,
+          width: 300,
           decoration:
               BoxDecoration(border: Border.all(), color: Colors.indigo[900]),
           child: FlatButton(
-            color: Colors.indigo[800],
+            color: Colors.indigo[900],
             child: Text(
               'Onayla',
               style: paragraphText,

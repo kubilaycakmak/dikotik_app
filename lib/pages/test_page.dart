@@ -26,25 +26,38 @@ class _TestPageState extends State<TestPage>
   String selectedChoiceButton = '';
   double selectedChoiceValueButton = 0;
   bool isClicked = false;
-  AudioPlayer audioPlayer = AudioPlayer();
+  AudioPlayer _player;
   Duration audioCount;
   int _seconds = 16;
+  int _soundSecond = 3;
   Timer _timer;
+  Timer _timerSound;
   Duration duration = new Duration(seconds: 1);
-
+  Duration duration1 = new Duration(seconds: 1);
+  
   @override
   void initState() {
-    audioPlayer.setAsset(widget.question.pathAudio);
-    print(widget.question.pathAudio);
-    // audioPlayer.setAsset(widget.question.pathAudio);
     timer();
+    soundTimer();
+    _seconds = 16;
+    _soundSecond = 3;
     super.initState();
+    _player = AudioPlayer();
+    _player.setAsset(widget.question.pathAudio);
   }
 
-  void nextQuestion() {
-    _seconds = 16;
-    controller.nextPage(duration: Duration(seconds: 1), curve: Curves.ease);
-    timer();
+  // void nextQuestion() {
+  //   setState(() {page = page + 1;});
+  //   _seconds = 16;
+  //   timer();
+  // }
+
+  @override
+  void dispose() { 
+    _player.dispose();
+    _timer.cancel();
+    _timerSound.cancel();
+    super.dispose();
   }
 
   void timer() async {
@@ -52,15 +65,30 @@ class _TestPageState extends State<TestPage>
       duration,
       (Timer timer) {
         setState(() {
-          if (_seconds == 13) {
-            audioPlayer.play();
-          }
-          if (_seconds < 1) {
+          if (_seconds < 2) {
             timer.cancel();
-            nextQuestion();
+            controller.nextPage(duration: Duration(milliseconds: 1), curve: Curves.linear);
           } else {
             setState(() {
               _seconds -= 1;
+            });
+          }
+        });
+      },
+    );
+  }
+
+   void soundTimer() async {
+    _timerSound = Timer.periodic(
+      duration1,
+      (Timer timer) {
+        setState(() {
+          if (_soundSecond < 1) {
+            _player.play();
+            timer.cancel();
+          } else {
+            setState(() {
+              _soundSecond -= 1;
             });
           }
         });
@@ -86,17 +114,10 @@ class _TestPageState extends State<TestPage>
     );
   }
 
-  @override
-  void dispose() {
-    print('sayfadan cikti');
-    super.dispose();
-    print('sayfadan cikti');
-    _timer.cancel();
-    audioPlayer.pause();
-  }
 
   @override
   Widget build(BuildContext context) {
+    
     super.build(context);
     return Scaffold(
       appBar: PreferredSize(
@@ -146,6 +167,39 @@ class _TestPageState extends State<TestPage>
         SizedBox(
           height: 10,
         ),
+        StreamBuilder<FullAudioPlaybackState>(
+                stream: _player.fullPlaybackStateStream,
+                builder: (context, snapshot) {
+                  final fullState = snapshot.data;
+                  final state = fullState?.state;
+                  final buffering = fullState?.buffering;
+                  return Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (state == AudioPlaybackState.connecting ||
+                          buffering == true)
+                        Container(
+                          margin: EdgeInsets.all(2.0),
+                          width: 2.0,
+                          height: 2.0,
+                          child: CircularProgressIndicator(),
+                        )
+                      else if (state == AudioPlaybackState.playing)
+                        IconButton(
+                          icon: Icon(Icons.volume_up),
+                          iconSize: 34.0,
+                          onPressed: null,
+                        )
+                      else
+                        IconButton(
+                          icon: Icon(Icons.volume_mute),
+                          iconSize: 34.0,
+                          onPressed: null,
+                        ),
+                    ],
+                  );
+                },
+              ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: ListView.builder(
@@ -164,18 +218,22 @@ class _TestPageState extends State<TestPage>
                             decoration: BoxDecoration(
                                 border: Border.all(),
                                 color: selectedChoices
-                                        .contains(widget.question.answer)
+                                        .contains(widget.question.answer[index])
                                     ? Colors.indigo[900]
                                     : Colors.white),
                             child: ChoiceChip(
+                              elevation: 0,
                               labelPadding:
                                   EdgeInsets.symmetric(horizontal: 10),
                               selectedShadowColor: Colors.white,
                               shadowColor: Colors.white,
                               selectedColor: Colors.indigo[900],
-                              backgroundColor: Colors.white10,
+                              backgroundColor: Colors.white,
+                              pressElevation: 0,
                               label: Container(
                                 width: 250,
+                                decoration: BoxDecoration(
+                                ),
                                 child: Text(
                                   widget.question.answer[index].title,
                                   textAlign: TextAlign.center,
@@ -244,14 +302,6 @@ class _TestPageState extends State<TestPage>
           height: 10,
         ),
         _buildCountDown(context),
-        // Text(
-        //   showtimer,
-        //   style: TextStyle(
-        //     fontSize: 35.0,
-        //     fontWeight: FontWeight.w700,
-        //     fontFamily: 'Times New Roman',
-        //   ),
-        // ),
         Container(
           width: 250,
           decoration:
@@ -259,6 +309,7 @@ class _TestPageState extends State<TestPage>
           child: FlatButton(
             color: Colors.indigo[800],
             child: Text(
+              widget.question.order == 35 ? 'Bitir' :
               'Sonraki',
               style: paragraphText,
             ),
@@ -266,12 +317,7 @@ class _TestPageState extends State<TestPage>
                 ? null
                 : widget.title == 'DİKKATLİCE  DİNLEYİN '
                     ? () {
-                        nextQuestion();
-                        print('===============================');
-                        print('both left score : ${user.getBothLeftScore}');
-                        print('both right score : ${user.getBothRightScore}');
-                        print('left score : ${user.getLeftScore}');
-                        print('right score : ${user.getRightScore}');
+                      controller.nextPage(duration: Duration(milliseconds: 1), curve: Curves.linear);
                       }
                     : () {
                         if (widget.question.side == 0) {
@@ -305,10 +351,7 @@ class _TestPageState extends State<TestPage>
                             }
                           }
                         }
-                        nextQuestion();
-                        // controller.nextPage(
-                        //     duration: Duration(milliseconds: 500),
-                        //     curve: Curves.easeIn);
+                        controller.nextPage(duration: Duration(milliseconds: 1), curve: Curves.linear);
                         print('===============================');
                         print('both left score : ${user.getBothLeftScore}');
                         print('both right score : ${user.getBothRightScore}');

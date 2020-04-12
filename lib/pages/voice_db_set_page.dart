@@ -25,6 +25,7 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
 
   @override
   void dispose() {
+    audioPlayer.stop();
     super.dispose();
   }
 
@@ -51,6 +52,7 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
     currentVol = await Volume.getVol;
     setState(() {});
   }
+
 
   setVol(int i) async {
     await Volume.setVol(i);
@@ -134,17 +136,17 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
             height: 10,
           ),
           Container(
-            width: 250,
+            width: 300,
             decoration:
                 BoxDecoration(border: Border.all(), color: Colors.indigo[900]),
             child: FlatButton(
-              color: Colors.indigo[800],
+              color: Colors.indigo[900],
               child: Text(
                 'Devam Et',
                 style: paragraphText,
               ),
               onPressed: () {
-                audioPlayer.stop();
+                audioPlayer.pause();
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -156,6 +158,7 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
                               page: MaterialPageRoute(
                                   builder: (context) => TestFieldPage()),
                             )));
+                            audioPlayer.pause();
               },
             ),
           ),

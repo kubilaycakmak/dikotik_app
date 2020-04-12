@@ -798,7 +798,7 @@ var mqWord18 = new Question(
   title: 'Sadece SAĞ  kulağınızdan duyduğunuz kelimeyi  işaretleyiniz.',
   side: 1,
   answer: <Answer>[
-    Answer(title: 'ten', value: 0),
+    Answer(title: 'ton', value: 0),
     Answer(title: 'mum', value: 0),
     Answer(title: 'ten', value: 1, side: 1),
     Answer(title: 'tok', value: 0),
@@ -815,7 +815,7 @@ var mqWord19 = new Question(
   answer: <Answer>[
     Answer(title: 'tüp', value: 1, side: 1),
     Answer(title: 'tüm', value: 0),
-    Answer(title: 'top', value: 0),
+    Answer(title: 'tek', value: 0),
     Answer(title: 'pus', value: 0),
     Answer(title: 'top', value: 0),
   ],

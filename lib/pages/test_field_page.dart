@@ -26,7 +26,7 @@ class _TestFieldPageState extends State<TestFieldPage> {
     return PageView(
       scrollDirection: Axis.horizontal,
       controller: controller,
-      physics: NeverScrollableScrollPhysics(),
+      physics: AlwaysScrollableScrollPhysics(),
       children: user.getSelectText == '2'
           ? user.getSelectSex == 0 ? listWomanSentences() : listManSentences()
           : user.getSelectText == '1'
