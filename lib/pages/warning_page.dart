@@ -8,22 +8,14 @@ class WarningPage extends StatelessWidget {
   final String desc;
   final Widget desc2;
   final MaterialPageRoute page;
+  
 
   const WarningPage({Key key, this.title, this.desc, this.desc2, this.page})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
-        child: AppBar(
-          centerTitle: true,
-          title: Text('Uyarı'.toUpperCase()),
-          backgroundColor: Colors.indigo[900],
-          elevation: 0,
-        ),
-      ),
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       body: buildWarningPageBody(context),
     );
   }
@@ -31,13 +23,11 @@ class WarningPage extends StatelessWidget {
   Widget buildWarningPageBody(BuildContext context) {
     return Center(
       child: Container(
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.indigo[900], width: 20)),
+        padding: const EdgeInsets.symmetric(vertical: 110),
         child: ListView(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 0),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               child: Text(
                 title.toUpperCase(),
                 textAlign: TextAlign.center,
@@ -58,12 +48,9 @@ class WarningPage extends StatelessWidget {
             ),
             Container(
                 width: 250,
-                margin: EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                    border: Border.all(), color: Colors.indigo[900]),
-                child: FlatButton(
-                  color: Colors.indigo[800],
-                  child: Text(
+                margin: EdgeInsets.symmetric(horizontal: 30),
+                child: FloatingActionButton.extended(
+                  label: Text(
                     'Tamam',
                     style: paragraphText,
                   ),

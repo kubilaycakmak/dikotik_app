@@ -1,11 +1,12 @@
-import 'dart:async';
+import 'package:dikotik_app/pages/widgets/bloc/timer_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:dikotik_app/data/question.dart';
 import 'package:dikotik_app/pages/style/text_style.dart';
-
 import 'get_information_page.dart';
 import 'test_field_page.dart';
+import 'widgets/ticker.dart';
 
 class TestPage extends StatefulWidget {
   final String title;
@@ -28,127 +29,71 @@ class _TestPageState extends State<TestPage>
   bool isClicked = false;
   AudioPlayer _player;
   Duration audioCount;
-  int _seconds = 16;
-  int _soundSecond = 3;
-  Timer _timer;
-  Timer _timerSound;
   Duration duration = new Duration(seconds: 1);
   Duration duration1 = new Duration(seconds: 1);
-  
+
   @override
   void initState() {
-    timer();
-    soundTimer();
-    _seconds = 16;
-    _soundSecond = 3;
     super.initState();
     _player = AudioPlayer();
     _player.setAsset(widget.question.pathAudio);
   }
 
-  // void nextQuestion() {
-  //   setState(() {page = page + 1;});
-  //   _seconds = 16;
-  //   timer();
-  // }
-
-  @override
-  void dispose() { 
-    _player.dispose();
-    _timer.cancel();
-    _timerSound.cancel();
-    super.dispose();
-  }
-
-  void timer() async {
-    _timer = Timer.periodic(
-      duration,
-      (Timer timer) {
-        setState(() {
-          if (_seconds < 2) {
-            timer.cancel();
-            controller.nextPage(duration: Duration(milliseconds: 1), curve: Curves.linear);
-          } else {
-            setState(() {
-              _seconds -= 1;
-            });
-          }
-        });
-      },
-    );
-  }
-
-   void soundTimer() async {
-    _timerSound = Timer.periodic(
-      duration1,
-      (Timer timer) {
-        setState(() {
-          if (_soundSecond < 1) {
-            _player.play();
-            timer.cancel();
-          } else {
-            setState(() {
-              _soundSecond -= 1;
-            });
-          }
-        });
-      },
-    );
-  }
-
-  @override
-  void setState(fn) {
-    if (mounted) {
-      super.setState(fn);
-    }
-  }
-
-  Text _buildCountDown(BuildContext context) {
-    int seconds = _seconds;
-    String secondsString = seconds.toString().padLeft(2, '0');
-
-    return Text(
-      'Süre : $secondsString',
-      style: TextStyle(
-          color: Colors.red, fontSize: 18, fontWeight: FontWeight.bold),
-    );
-  }
-
-
   @override
   Widget build(BuildContext context) {
-    
     super.build(context);
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
-        child: AppBar(
-          centerTitle: true,
-          title: Text(widget.title == 'DİKKATLİCE  DİNLEYİN '
-              ? 'ALIŞTIRMA - ${widget.question.order}/35'
-              : 'TEST - ${widget.question.order}/35'),
-          backgroundColor: Colors.indigo[900],
-          elevation: 0,
-          leading: Icon(
-            Icons.not_interested,
-            color: Colors.transparent,
+    return BlocProvider(
+        create: (context) => TimerBloc(ticker: Ticker()),
+        child: Stack(
+          children: <Widget>[
+            ListView(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 100.0),
+                child: Center(
+                  child: BlocBuilder<TimerBloc, TimerState>(
+                    builder: (context, state) {
+                      final String secondsStr = (state.duration % 60)
+                          .floor()
+                          .toString()
+                          .padLeft(2, '0');
+
+                      if(state is Ready){
+                        BlocProvider.of<TimerBloc>(context).add(Start(duration: 16));
+                      }
+                      if(state is Running){
+                        return _buildTestArea(state, secondsStr);
+                      }
+                      if(state is Finished){
+                        controller.nextPage(duration: Duration(seconds: 1), curve: Curves.linear);
+                        BlocProvider.of<TimerBloc>(context).add(Reset());
+                        BlocProvider.of<TimerBloc>(context).add(Start(duration: 16));
+                      }
+                      return Container();
+
+                      // BlocProvider.of<SearchBloc>(context).onSearchInitiated(searchQuery, 1, 'vertical');
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
+          ],
         ),
-      ),
-      backgroundColor: Colors.white,
-      body: ListView(
-        children: <Widget>[
-          _buildTestArea(),
-        ],
-      ),
-    );
+      );
   }
 
-  Column _buildTestArea() {
+  Widget _buildTestArea(TimerState state, String time) {
     return Column(
       children: <Widget>[
         Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            child: Center(
+              child: Text(widget.title == 'DİKKATLİCE  DİNLEYİN '
+              ? 'ALIŞTIRMA - ${widget.question.order}/35'
+              : 'TEST - ${widget.question.order}/35', style: warningText,),
+            )),Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
             child: Center(
               child: Text(
                 widget.title,
@@ -156,17 +101,14 @@ class _TestPageState extends State<TestPage>
               ),
             )),
         Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
             child: Center(
               child: Text(
                 widget.question.title,
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.black, fontSize: 18),
+                style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
               ),
             )),
-        SizedBox(
-          height: 10,
-        ),
         StreamBuilder<FullAudioPlaybackState>(
                 stream: _player.fullPlaybackStateStream,
                 builder: (context, snapshot) {
@@ -179,7 +121,7 @@ class _TestPageState extends State<TestPage>
                       if (state == AudioPlaybackState.connecting ||
                           buffering == true)
                         Container(
-                          margin: EdgeInsets.all(2.0),
+                          padding: EdgeInsets.all(0.0),
                           width: 2.0,
                           height: 2.0,
                           child: CircularProgressIndicator(),
@@ -201,7 +143,7 @@ class _TestPageState extends State<TestPage>
                 },
               ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 5),
           child: ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
@@ -216,81 +158,84 @@ class _TestPageState extends State<TestPage>
                         ? Container(
                             width: 250,
                             decoration: BoxDecoration(
-                                border: Border.all(),
                                 color: selectedChoices
                                         .contains(widget.question.answer[index])
-                                    ? Colors.indigo[900]
-                                    : Colors.white),
-                            child: ChoiceChip(
+                                    ? Colors.transparent
+                                    : Colors.transparent),
+                            child: FloatingActionButton.extended(
                               elevation: 0,
-                              labelPadding:
-                                  EdgeInsets.symmetric(horizontal: 10),
-                              selectedShadowColor: Colors.white,
-                              shadowColor: Colors.white,
-                              selectedColor: Colors.indigo[900],
-                              backgroundColor: Colors.white,
-                              pressElevation: 0,
+                              // labelPadding:
+                              //     EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                              // selectedShadowColor: Colors.transparent,
+                              // shadowColor: Colors.transparent,
+                              // selectedColor: Colors.indigo[900],
+                              backgroundColor: selectedChoices
+                                  .contains(widget.question.answer[index]) ? Colors.white : ThemeData.light().floatingActionButtonTheme.backgroundColor,
                               label: Container(
                                 width: 250,
-                                decoration: BoxDecoration(
-                                ),
                                 child: Text(
                                   widget.question.answer[index].title,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: selectedChoices.contains(
                                               widget.question.answer[index])
-                                          ? Colors.white
-                                          : Colors.black),
+                                          ? Colors.black
+                                          : Colors.white),
                                 ),
                               ),
-                              selected: selectedChoices
-                                  .contains(widget.question.answer[index]),
-                              onSelected: (val) {
+                              
+                              // selected: selectedChoices
+                              //     .contains(widget.question.answer[index]),
+                              onPressed: () {
                                 setState(() {
                                   isClicked = true;
                                   selectedChoices.contains(
                                           widget.question.answer[index])
                                       ? selectedChoices
                                           .remove(widget.question.answer[index])
-                                      : selectedChoices.length == 2
-                                          ? 0
+                                      : selectedChoices.length == 1
+                                          ? widget.title == 'DİKKATLİCE  DİNLEYİN ' ? skipAnswer() : checkAnswer()
                                           : selectedChoices.add(
                                               widget.question.answer[index]);
                                 });
                               },
+                              
                             ))
                         : Container(
                             width: 250,
                             decoration: BoxDecoration(
-                              border: Border.all(),
                               color: selectedChoiceButton ==
                                       widget.question.answer[index].title
-                                  ? Colors.indigo[900]
-                                  : Colors.white,
+                                  ? Colors.transparent
+                                  : Colors.transparent,
                             ),
-                            child: FlatButton(
-                              color: selectedChoiceButton ==
+                            child: FloatingActionButton.extended(
+                              // color: selectedChoiceButton ==
+                              //         widget.question.answer[index].title
+                              //     ? Colors.indigo[900]
+                              //     : Colors.white,
+                              backgroundColor: selectedChoiceButton ==
                                       widget.question.answer[index].title
-                                  ? Colors.indigo[900]
-                                  : Colors.white,
-                              child: Text(
+                                  ? Colors.white : ThemeData.light().floatingActionButtonTheme.backgroundColor,
+                              label: Text(
                                 widget.question.answer[index].title,
                                 style: TextStyle(
                                   color: selectedChoiceButton ==
                                           widget.question.answer[index].title
-                                      ? Colors.white
-                                      : Colors.black,
+                                      ? Colors.black
+                                      : Colors.white,
                                 ),
                               ),
-                              onPressed: () {
-                                setState(() {
-                                  isClicked = true;
+                              onPressed: widget.title == 'DİKKATLİCE  DİNLEYİN '
+                                ? () {
+                                  skipAnswer();
+                                  }
+                                : () {
                                   selectedChoiceButton =
                                       widget.question.answer[index].title;
                                   selectedChoiceValueButton =
                                       widget.question.answer[index].value;
-                                });
+                                checkAnswer();
                               },
                             ),
                           ),
@@ -301,69 +246,125 @@ class _TestPageState extends State<TestPage>
         SizedBox(
           height: 10,
         ),
-        _buildCountDown(context),
-        Container(
-          width: 250,
-          decoration:
-              BoxDecoration(border: Border.all(), color: Colors.indigo[900]),
-          child: FlatButton(
-            color: Colors.indigo[800],
-            child: Text(
-              widget.question.order == 35 ? 'Bitir' :
-              'Sonraki',
-              style: paragraphText,
-            ),
-            onPressed: !isClicked
-                ? null
-                : widget.title == 'DİKKATLİCE  DİNLEYİN '
-                    ? () {
-                      controller.nextPage(duration: Duration(milliseconds: 1), curve: Curves.linear);
-                      }
-                    : () {
-                        if (widget.question.side == 0) {
-                          if (selectedChoiceValueButton == 1.0) {
-                            user.setLeftScore = user.getLeftScore + 10.0;
-                          }
-                        } else if (widget.question.side == 1) {
-                          if (selectedChoiceValueButton == 1.0) {
-                            user.setRightScore = user.getRightScore + 10.0;
-                          }
-                        }
-                        if (widget.question.side == 2) {
-                          if (selectedChoices.length >= 1) {
-                            if (selectedChoices[0].value == 1) {
-                              if (selectedChoices[0].side == 0) {
-                                user.setBothLeftScore =
-                                    user.getBothLeftScore + 10.0;
-                              } else {
-                                user.setBothRightScore =
-                                    user.getBothRightScore + 10.0;
-                              }
-                            }
-                            if (selectedChoices[1].value == 1) {
-                              if (selectedChoices[1].side == 0) {
-                                user.setBothLeftScore =
-                                    user.getBothLeftScore + 10.0;
-                              } else {
-                                user.setBothRightScore =
-                                    user.getBothRightScore + 10.0;
-                              }
-                            }
-                          }
-                        }
-                        controller.nextPage(duration: Duration(milliseconds: 1), curve: Curves.linear);
-                        print('===============================');
-                        print('both left score : ${user.getBothLeftScore}');
-                        print('both right score : ${user.getBothRightScore}');
-                        print('left score : ${user.getLeftScore}');
-                        print('right score : ${user.getRightScore}');
-                      },
-          ),
-        ),
+        // _buildCountDown(context)
+        Text(
+          time,
+          style: Test.timerTextStyle,
+        )
       ],
     );
   }
 
+  
+
+  skipAnswer(){
+    controller.nextPage(duration: Duration(milliseconds: 1), curve: Curves.linear);
+  }
+
+  checkAnswer(){
+    print('checking');
+    setState(() {
+      if (widget.question.side == 0) {
+      if (selectedChoiceValueButton == 1.0) {
+        user.setLeftScore = user.getLeftScore + 10.0;
+      }
+    } else if (widget.question.side == 1) {
+      if (selectedChoiceValueButton == 1.0) {
+        user.setRightScore = user.getRightScore + 10.0;
+      }
+    }
+    if (widget.question.side == 2) {
+      print(selectedChoices.length);
+      if (selectedChoices.length > 1) {
+        if (selectedChoices[0].value == 1) {
+          if (selectedChoices[0].side == 0) {
+            user.setBothLeftScore =
+                user.getBothLeftScore + 10.0;
+          } else {
+            user.setBothRightScore =
+                user.getBothRightScore + 10.0;
+          }
+        }
+        if (selectedChoices[1].value == 1) {
+          if (selectedChoices[1].side == 0) {
+            user.setBothLeftScore =
+                user.getBothLeftScore + 10.0;
+          } else {
+            user.setBothRightScore =
+                user.getBothRightScore + 10.0;
+          }
+        }
+      }
+    }
+    });
+    print('===============================');
+    print('both left score : ${user.getBothLeftScore}');
+    print('both right score : ${user.getBothRightScore}');
+    print('left score : ${user.getLeftScore}');
+    print('right score : ${user.getRightScore}');
+    controller.nextPage(duration: Duration(milliseconds: 1), curve: Curves.linear);
+  }
+
   @override
   bool get wantKeepAlive => false;
+}
+
+class Actions extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: _mapStateToActionButtons(
+        timerBloc: BlocProvider.of<TimerBloc>(context),
+      ),
+    );
+  }
+
+  List<Widget> _mapStateToActionButtons({
+    TimerBloc timerBloc,
+  }) {
+    final TimerState currentState = timerBloc.state;
+    if (currentState is Ready) {
+      return [
+        FloatingActionButton(
+          child: Icon(Icons.play_arrow),
+          onPressed: () =>
+              timerBloc.add(Start(duration: currentState.duration)),
+        ),
+      ];
+    }
+    if (currentState is Running) {
+      return [
+        FloatingActionButton(
+          child: Icon(Icons.pause),
+          onPressed: () => timerBloc.add(Pause()),
+        ),
+        FloatingActionButton(
+          child: Icon(Icons.replay),
+          onPressed: () => timerBloc.add(Reset()),
+        ),
+      ];
+    }
+    if (currentState is Paused) {
+      return [
+        FloatingActionButton(
+          child: Icon(Icons.play_arrow),
+          onPressed: () => timerBloc.add(Resume()),
+        ),
+        FloatingActionButton(
+          child: Icon(Icons.replay),
+          onPressed: () => timerBloc.add(Reset()),
+        ),
+      ];
+    }
+    if (currentState is Finished) {
+      return [
+        FloatingActionButton(
+          child: Icon(Icons.replay),
+          onPressed: () => timerBloc.add(Reset()),
+        ),
+      ];
+    }
+    return [];
+  }
 }
