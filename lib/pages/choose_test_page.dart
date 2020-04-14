@@ -1,4 +1,5 @@
 import 'package:dikotik_app/pages/choose_voice_sex.dart';
+import 'package:dikotik_app/pages/style/background.dart';
 import 'package:dikotik_app/pages/style/text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -13,44 +14,51 @@ class _PickTestPageState extends State<PickTestPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
-        child: AppBar(
-          centerTitle: true,
-          title: Text('Test Seçim Ekranı'),
-          backgroundColor: Colors.indigo[900],
-          elevation: 0,
-        ),
+      // appBar: PreferredSize(
+      //   preferredSize: Size.fromHeight(60),
+      //   child: AppBar(
+      //     backgroundColor: ThemeData.light().colorScheme.secondary,
+      //     centerTitle: true,
+      //     title: Text('Test Seçim Ekranı'),
+      //     elevation: 0,
+      //   ),
+      // ),
+      body: Stack(
+        children: <Widget>[
+          Background(),
+          _buildTestUnits(context),
+        ],
       ),
-      backgroundColor: Colors.white,
-      body: _buildTestUnits(context),
     );
   }
 
   Widget _buildTestUnits(BuildContext context) {
-    return ListView(
-      children: <Widget>[
-        Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            child: Center(
-              child: Text(
-                'LÜTFEN TEST SEÇİNİZ',
-                style: titleText,
-              ),
-            )),
-        customCard(
-            langname: 'Dikotik Sayı Testi',
-            des: '1',
-            image: 'assets/images/entry.png'),
-        customCard(
-            langname: 'Dikotik Kelime Testi',
-            des: '3',
-            image: 'assets/images/entry.png'),
-        customCard(
-            langname: 'Dikotik Cümle \nTanımlama Testi',
-            des: '2',
-            image: 'assets/images/entry.png')
-      ],
+    return Center(
+      child: ListView(
+        padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 10),
+        children: <Widget>[
+          Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+              child: Center(
+                child: Text(
+                  'LÜTFEN TEST SEÇİNİZ',
+                  style: titleText,
+                ),
+              )),
+          customCard(
+              langname: 'Dikotik Sayı Testi',
+              des: '1',
+              image: 'assets/images/audio.png'),
+          customCard(
+              langname: 'Dikotik Kelime Testi',
+              des: '3',
+              image: 'assets/images/audio.png'),
+          customCard(
+              langname: 'Dikotik Cümle \nTanımlama Testi',
+              des: '2',
+              image: 'assets/images/audio.png')
+        ],
+      ),
     );
   }
 
@@ -74,7 +82,7 @@ class _PickTestPageState extends State<PickTestPage> {
                       )));
         },
         child: Material(
-          color: Colors.indigo[900],
+          color: Colors.lightBlue.shade900,
           elevation: 10.0,
           borderRadius: BorderRadius.circular(25.0),
           child: Container(
@@ -84,21 +92,11 @@ class _PickTestPageState extends State<PickTestPage> {
                   padding: EdgeInsets.symmetric(
                     vertical: 10.0,
                   ),
-                  child: Material(
-                    elevation: 5.0,
-                    borderRadius: BorderRadius.circular(100.0),
-                    child: Container(
-                      height: 90.0,
-                      width: 150.0,
-                      child: ClipOval(
-                        child: Image(
-                          fit: BoxFit.cover,
-                          image: AssetImage(
-                            image,
-                          ),
-                        ),
-                      ),
-                    ),
+                  child: Image(
+                    height: 50,
+                    width: 100,
+                    color: Colors.white70,
+                    image: AssetImage(image),
                   ),
                 ),
                 Center(

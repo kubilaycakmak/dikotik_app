@@ -1,6 +1,9 @@
+import 'package:dikotik_app/data/numbers.dart';
+import 'package:dikotik_app/data/question.dart';
+import 'package:dikotik_app/data/words.dart';
+import 'package:dikotik_app/pages/style/background.dart';
 import 'package:dikotik_app/pages/style/text_style.dart';
 import 'package:dikotik_app/pages/test_field_page.dart';
-import 'package:dikotik_app/pages/warning_page.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:volume/volume.dart';
@@ -61,26 +64,31 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
-        child: AppBar(
-          centerTitle: true,
-          title: Text('Ses Seviye Ekranı'),
-          backgroundColor: Colors.indigo[900],
-          elevation: 0,
-        ),
+      // appBar: PreferredSize(
+      //   preferredSize: Size.fromHeight(60),
+      //   child: AppBar(
+      //     backgroundColor: ThemeData.light().colorScheme.secondary,
+      //     centerTitle: true,
+      //     title: Text('Test Seçim Ekranı'),
+      //     elevation: 0,
+      //   ),
+      // ),
+      body: Stack(
+        children: <Widget>[
+          Background(),
+          _buildVoiceDB(context),
+        ],
       ),
-      backgroundColor: Colors.white,
-      body: _buildVoiceDB(context),
     );
   }
 
-  Center _buildVoiceDB(BuildContext context) {
+  Widget _buildVoiceDB(BuildContext context) {
     return Center(
-      child: Column(
+      child: ListView(
+       padding: const EdgeInsets.symmetric(vertical: 120, horizontal: 20),
         children: <Widget>[
           Padding(
-              padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: Center(
                 child: Text(
                   'Ses Şiddetini Rahatça Duyabileceğiniz Seviyeye Ayarlayın',
@@ -99,10 +107,11 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
           SizedBox(
             height: 20,
           ),
-          IconButton(
-            iconSize: 50,
-            icon: Icon(
-              Icons.play_circle_filled,
+          FloatingActionButton(
+            backgroundColor: Colors.lightBlue.shade900,
+            heroTag: 'playArrow',
+            child: Icon(
+              Icons.play_arrow,
             ),
             onPressed: () {
               if (user.getSelectSex == 0) {
@@ -119,7 +128,7 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                   child: Slider(
-                    activeColor: Colors.teal[300],
+                    activeColor: Colors.lightBlue.shade900,
                     label: 'db',
                     value: currentVol / 1.0,
                     divisions: maxVol,
@@ -133,15 +142,15 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
                 )
               : Container(),
           SizedBox(
-            height: 10,
+            height: 20,
           ),
           Container(
             width: 300,
-            decoration:
-                BoxDecoration(border: Border.all(), color: Colors.indigo[900]),
-            child: FlatButton(
-              color: Colors.indigo[900],
-              child: Text(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: FloatingActionButton.extended(
+              backgroundColor: Colors.lightBlue.shade900,
+              heroTag: 'devamEtx',
+              label: Text(
                 'Devam Et',
                 style: paragraphText,
               ),
@@ -150,15 +159,8 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => WarningPage(
-                              title: 'ALIŞTIRMA',
-                              desc:
-                                  'Bu kısım teste alışmanız içindir. Sonuca dahil edilmeyecektir.',
-                              desc2: Container(),
-                              page: MaterialPageRoute(
-                                  builder: (context) => TestFieldPage()),
-                            )));
-                            audioPlayer.pause();
+                        builder: (context) => TestFieldPage(questions: user.getSelectSex == 0 ? user.getSelectText == '1' ? wqNumber : user.getSelectText == '2' ? wqSentences : user.getSelectText == '3' ? wqWord : 0 : user.getSelectText == '1' ? mqNumber : user.getSelectText == '2' ? mqSentences : user.getSelectText == '3' ? mqWord : 0,)),
+                            );
               },
             ),
           ),

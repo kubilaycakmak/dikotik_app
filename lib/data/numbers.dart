@@ -1,9 +1,80 @@
 import 'package:dikotik_app/data/question.dart';
-import 'package:dikotik_app/pages/result_page.dart';
-import 'package:dikotik_app/pages/test_page.dart';
-import 'package:dikotik_app/pages/warning_page.dart';
-import 'package:flutter/material.dart';
 
+var wqNumber = [	
+  wqNumber1,	
+  wqNumber2,	
+  wqNumber3,	
+  wqNumber4,	
+  wqNumber5,	
+  wqNumber6,	
+  wqNumber7,	
+  wqNumber8,	
+  wqNumber9,	
+  wqNumber10,	
+  wqNumber11,	
+  wqNumber12,	
+  wqNumber13,	
+  wqNumber14,	
+  wqNumber15,	
+  wqNumber16,	
+  wqNumber17,	
+  wqNumber18,	
+  wqNumber19,	
+  wqNumber20,	
+  wqNumber21,	
+  wqNumber22,	
+  wqNumber23,	
+  wqNumber24,	
+  wqNumber25,	
+  wqNumber26,	
+  wqNumber27,	
+  wqNumber28,	
+  wqNumber29,	
+  wqNumber30,	
+  wqNumber31,	
+  wqNumber32,	
+  wqNumber33,	
+  wqNumber34,	
+  wqNumber35,	
+];
+
+var mqNumber = [	
+  mqNumber1,	
+  mqNumber2,	
+  mqNumber3,	
+  mqNumber4,	
+  mqNumber5,	
+  mqNumber6,	
+  mqNumber7,	
+  mqNumber8,	
+  mqNumber9,	
+  mqNumber10,	
+  mqNumber11,	
+  mqNumber12,	
+  mqNumber13,	
+  mqNumber14,	
+  mqNumber15,	
+  mqNumber16,	
+  mqNumber17,	
+  mqNumber18,	
+  mqNumber19,	
+  mqNumber20,	
+  mqNumber21,	
+  mqNumber22,	
+  mqNumber23,	
+  mqNumber24,	
+  mqNumber25,	
+  mqNumber26,	
+  mqNumber27,	
+  mqNumber28,	
+  mqNumber29,	
+  mqNumber30,	
+  mqNumber31,	
+  mqNumber32,	
+  mqNumber33,	
+  mqNumber34,	
+  mqNumber35,	
+];
 
 var wqNumber1 = new Question(
   title: 'Sadece SOL  kulağınızdan duyduğunuz sayıları  işaretleyiniz.',
@@ -1078,414 +1149,3 @@ var mqNumber35 = new Question(
   pathAudio: 'assets/sound3/man/msound34.mp3',
   voiceSex: 0,
 );
-
-
-  List<Widget> listManNumber() {
-    return <Widget>[
-      WarningPage(
-          title: 'BİLGİLENDİRME',
-          desc:
-              'Kulaklığınızı sağ ve sol kulak olarak taktıgınızdan emin olunuz.',
-          desc2: Center()),
-      WarningPage(
-          title: 'BİLGİLENDİRME',
-          desc:
-              'Bu test 35 sorudan oluşmaktadır. İlk 5 soru kullanıcıların teste alışması için oluşturulmuştur. '
-              'Testte her iki kulağınıza aynı anda sayılar gelecek olup sizden sadece verilen yönlendirmelere göre doğru sayı seçimi yapılması istenmektedir.',
-          desc2: Center()),
-      WarningPage(
-        title: 'BİLGİLENDİRME',
-        desc: '',
-        desc2: Center(
-          child: RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(children: <TextSpan>[
-              TextSpan(
-                  text:
-                      'Test sırasında aynı anda her iki kulağınıza sayılar gelecek. Sizden,',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
-              TextSpan(
-                  text: '\n\n1) Sadece sağ kulağınızdan duyduğunuz sayıyı',
-                  style: TextStyle(color: Colors.red, fontSize: 18)),
-              TextSpan(
-                  text: '\n\n2) Sadece sol kulağınızdan duyduğunuz sayıyı',
-                  style: TextStyle(color: Colors.red, fontSize: 18)),
-              TextSpan(
-                  text:
-                      '\n\n3) Her iki kulağınızdan duyduğunuz sayıları seçmeniz istenecektir.',
-                  style: TextStyle(color: Colors.red, fontSize: 18)),
-            ]),
-          ),
-        ),
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN ',
-        question: mqNumber1,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN ',
-        question: mqNumber2,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN ',
-        question: mqNumber3,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN ',
-        question: mqNumber4,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN ',
-        question: mqNumber5,
-      ),
-      WarningPage(
-        title: 'TEST',
-        desc: 'Dikotik testine başlıyoruz',
-        desc2: Center(),
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber6,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber7,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber8,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber9,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber10,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber11,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber12,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber13,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber14,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber15,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber16,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber17,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber18,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber19,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber20,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber21,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber22,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber23,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber24,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber25,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber26,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber27,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber28,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber29,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber30,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber31,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber32,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber33,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber34,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: mqNumber35,
-      ),
-      WarningPage(
-        title: 'SONUÇ',
-        desc: 'Testi başarı ile tamamladınız',
-        desc2: Center(
-          child: Text(
-            'Sonuçları görmek için devam ediniz...',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 18, color: Colors.black),
-          ),
-        ),
-        page: MaterialPageRoute(
-          builder: (context) => ResultPage(),
-        ),
-      )
-    ];
-  }
-
-  List<Widget> listWomanNumber() {
-    return <Widget>[
-      WarningPage(
-          title: 'BİLGİLENDİRME',
-          desc:
-              'Kulaklığınızı sağ ve sol kulak olarak taktıgınızdan emin olunuz.',
-          desc2: Center()),
-      WarningPage(
-          title: 'BİLGİLENDİRME',
-          desc:
-              'Bu test 35 sorudan oluşmaktadır. İlk 5 soru kullanıcıların teste alışması için oluşturulmuştur. '
-              'Testte her iki kulağınıza aynı anda sayılar gelecek olup sizden sadece verilen yönlendirmelere göre doğru sayı seçimi yapılması istenmektedir.',
-          desc2: Center()),
-      WarningPage(
-        title: 'BİLGİLENDİRME',
-        desc: '',
-        desc2: Center(
-          child: RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(children: <TextSpan>[
-              TextSpan(
-                  text:
-                      'Test sırasında aynı anda her iki kulağınıza sayılar gelecek. Sizden,',
-                  style: TextStyle(color: Colors.black, fontSize: 18)),
-              TextSpan(
-                  text: '\n\n1) Sadece sağ kulağınızdan duyduğunuz sayıyı',
-                  style: TextStyle(color: Colors.red, fontSize: 18)),
-              TextSpan(
-                  text: '\n\n2) Sadece sol kulağınızdan duyduğunuz sayıyı',
-                  style: TextStyle(color: Colors.red, fontSize: 18)),
-              TextSpan(
-                  text:
-                      '\n\n3) Her iki kulağınızdan duyduğunuz sayıları seçmeniz istenecektir.',
-                  style: TextStyle(color: Colors.red, fontSize: 18)),
-            ]),
-          ),
-        ),
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN ',
-        question: wqNumber1,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN ',
-        question: wqNumber2,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN ',
-        question: wqNumber3,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN ',
-        question: wqNumber4,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN ',
-        question: wqNumber5,
-      ),
-      WarningPage(
-        title: 'BİLGİLENDİRME',
-        desc: 'Bu testte SOL kulağınızdan duyduğunuz sayıyı seçiniz.',
-        desc2: Center(),
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber6,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber7,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber8,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber9,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber10,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber11,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber12,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber13,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber14,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber15,
-      ),
-      WarningPage(
-        title: 'BİLGİLENDİRME',
-        desc: 'Bu testte SAĞ kulağınızdan duyduğunuz sayıyı seçiniz.',
-        desc2: Center(),
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber16,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber17,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber18,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber19,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber20,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber21,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber22,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber23,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber24,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber25,
-      ),
-      WarningPage(
-        title: 'BİLGİLENDİRME',
-        desc: 'Bu testte HER İKİ kulağınızdan duyduğunuz sayıyı seçiniz.',
-        desc2: Center(),
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber26,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber27,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber28,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber29,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber30,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber31,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber32,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber33,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber34,
-      ),
-      TestPage(
-        title: 'DİKKATLİCE  DİNLEYİN',
-        question: wqNumber35,
-      ),
-     WarningPage(
-        title: 'SONUÇ',
-        desc: 'Testi başarı ile tamamladınız',
-        desc2: Center(
-          child: Text(
-            'Sonuçları görmek için devam ediniz...',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 18, color: Colors.black),
-          ),
-        ),
-        page: MaterialPageRoute(
-          builder: (context) => ResultPage(),
-        ),
-      )
-    ];
-  }

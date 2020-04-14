@@ -25,14 +25,9 @@ class _SplashscreenState extends State<Splashscreen> {
     return Scaffold(
       backgroundColor: Colors.indigo[900],
       body: Center(
-        child: Text(
-          "Dikotik Test\n Uygulaması",
-          style: TextStyle(
-            fontSize: 50.0,
-            color: Colors.white,
-            fontFamily: "Satisfy",
-          ),
-          textAlign: TextAlign.center,
+        child: Image(
+          color: Colors.white70,
+          image: AssetImage('assets/images/audio.png'),
         ),
       ),
     );

@@ -32,8 +32,8 @@ class _GetInformationPageState extends State<GetInformationPage> {
 
   Widget _buildGetInformation(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 120),
       child: ListView(
+        padding: EdgeInsets.symmetric(vertical: 120),
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
@@ -90,16 +90,14 @@ class _GetInformationPageState extends State<GetInformationPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      ChoiceChip(
-                        backgroundColor: Colors.indigo[900],
-                        selectedColor: Colors.indigo[400],
-                        labelPadding: EdgeInsets.all(8.0),
+                      FloatingActionButton.extended(
+                        heroTag: 'Kadin',
+                        backgroundColor: selectedChoiceButton == "Kadın" ? Colors.lightBlue.shade900 : Colors.blue.shade400,
                         label: Text(
                           'Kadın',
                           style: paragraphText,
                         ),
-                        selected: selectedChoiceButton == "Kadın",
-                        onSelected: (val) {
+                        onPressed: () {
                           setState(() {
                             selectedChoiceButton = "Kadın";
                           });
@@ -121,16 +119,15 @@ class _GetInformationPageState extends State<GetInformationPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      ChoiceChip(
-                        selectedColor: Colors.indigo[400],
-                        backgroundColor: Colors.indigo[900],
-                        labelPadding: EdgeInsets.all(8.0),
+                      FloatingActionButton.extended(
+                        heroTag: 'Erkek',
+                        backgroundColor: selectedChoiceButton == "Erkek" ? Colors.lightBlue.shade900 : Colors.blue.shade400,
                         label: Text(
                           'Erkek',
                           style: paragraphText,
                         ),
-                        selected: selectedChoiceButton == "Erkek",
-                        onSelected: (val) {
+                        // selected: selectedChoiceButton == "Erkek",
+                        onPressed: () {
                           setState(() {
                             selectedChoiceButton = "Erkek";
                           });
@@ -151,14 +148,12 @@ class _GetInformationPageState extends State<GetInformationPage> {
                   ),
                   Container(
                     width: 300,
-                    decoration: BoxDecoration(
-                        border: Border.all(), color: Colors.indigo[900]),
-                    child: FlatButton(
+                    child: FloatingActionButton.extended(
+                      backgroundColor: Colors.lightBlue.shade900,
+                      heroTag: 'kayit',
                       focusColor: Colors.transparent,
               hoverColor: Colors.transparent,
-              highlightColor: Colors.transparent,
               splashColor: Colors.transparent,
-              color: Colors.indigo[900],
                       onPressed: () {
                         print(c1.text);
                         user = new User(
@@ -176,7 +171,7 @@ class _GetInformationPageState extends State<GetInformationPage> {
                             MaterialPageRoute(
                                 builder: (context) => PickTestPage()));
                       },
-                      child: Text(
+                      label: Text(
                         'Onayla',
                         style: paragraphText,
                       ),
@@ -184,63 +179,11 @@ class _GetInformationPageState extends State<GetInformationPage> {
                   ),
                 ],
               )
-              // TextField(
-              //   controller: c3,
-              //   onSubmitted: (val) {
-              //     print('object');
-              //   },
-              //   decoration: InputDecoration(
-              //     border: OutlineInputBorder(),
-              //       hintText: 'Cinsiyet:', hintStyle: textField),
-              // ),
               ),
         ],
       ),
     );
   }
-
-  calculateAge(DateTime birthDate) {
-    DateTime currentDate = DateTime.now();
-    int age = currentDate.year - birthDate.year;
-    int month1 = currentDate.month;
-    int month2 = birthDate.month;
-    if (month2 > month1) {
-      age--;
-    } else if (month1 == month2) {
-      int day1 = currentDate.day;
-      int day2 = birthDate.day;
-      if (day2 > day1) {
-        age--;
-      }
-    }
-    return age;
-  }
-
-  // selectDate(BuildContext context, DateTime initialDateTime,
-  //     {DateTime lastDate}) async {
-  //   Completer completer = Completer();
-  //   String _selectedDateInString;
-  //   if (Platform.isAndroid)
-
-  //         .then((temp) {
-  //       if (temp == null) return null;
-  //       completer.complete(temp);
-  //       setState(() {});
-  //     });
-  //   else
-  //     DatePicker.showDatePicker(
-  //       context,
-  //       dateFormat: 'yyyy-mmm-dd',
-  //       locale: 'en',
-  //       onConfirm2: (temp, selectedIndex) {
-  //         if (temp == null) return null;
-  //         completer.complete(temp);
-
-  //         setState(() {});
-  //       },
-  //     );
-  //   return completer.future;
-  // }
 
   String birthDate = "";
   int age = -1;

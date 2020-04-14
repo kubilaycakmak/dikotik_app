@@ -19,9 +19,9 @@ class Background extends StatelessWidget {
             Color.fromRGBO(172, 182, 219, 0.7)
           ],
           [
-            Color.fromRGBO(72, 73, 126, 1),
+            Color.fromRGBO(172, 173, 226, 1),
             Color.fromRGBO(125, 170, 206, 1),
-            Color.fromRGBO(190, 238, 246, 0.7)
+            Color.fromRGBO(600, 138, 246, 0.7)
           ],
         ],
         durations: [19440, 10800, 6000],

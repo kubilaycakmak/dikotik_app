@@ -56,6 +56,8 @@ class EntryPage extends StatelessWidget {
       width: 300,
       padding: EdgeInsets.symmetric(horizontal: 20),
           child: FloatingActionButton.extended(
+            backgroundColor: Colors.lightBlue.shade900,
+            heroTag: '$title',
             focusColor: Colors.transparent,
             hoverColor: Colors.transparent,
             splashColor: Colors.transparent,
