@@ -1,6 +1,7 @@
-import 'package:dikotik_app/pages/entry_page.dart';
 import 'package:dikotik_app/pages/style/background.dart';
+import 'package:dikotik_app/pages/widgets/bloc/timer_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'get_information_page.dart';
 import 'style/text_style.dart';
@@ -88,11 +89,14 @@ class _ResultPageState extends State<ResultPage> {
                       style: paragraphText,
                     ),
                     onPressed: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => EntryPage()),
-                        (Route<dynamic> route) => false,
-                      );
+                      Navigator.pushNamed(context, 'homeScreen');
+                      BlocProvider.of<TimerBloc>(context).add(Pause());
+                      // BlocProvider.of<TimerBloc>(context).add(Pause());
+                      // Navigator.pushAndRemoveUntil(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => EntryPage()),
+                      //   (Route<dynamic> route) => false,
+                      // );
                     },
                   )),
             )

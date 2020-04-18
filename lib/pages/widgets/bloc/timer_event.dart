@@ -41,6 +41,14 @@ class Reset extends TimerEvent {
   List<Object> get props => throw UnimplementedError();
 }
 
+// class Result extends TimerEvent {
+//   @override
+//   String toString() => "Result";
+
+//   @override
+//   List<Object> get props => throw UnimplementedError();
+// }
+
 class Tick extends TimerEvent {
   final int duration;
 

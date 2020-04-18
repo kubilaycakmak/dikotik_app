@@ -1,4 +1,5 @@
 import 'package:dikotik_app/pages/result_page.dart';
+import 'package:dikotik_app/pages/warning_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,7 +9,6 @@ import 'package:dikotik_app/pages/style/background.dart';
 import 'package:dikotik_app/pages/widgets/bloc/timer_bloc.dart';
 import 'package:dikotik_app/pages/widgets/ticker.dart';
 import 'package:just_audio/just_audio.dart';
-
 import 'get_information_page.dart';
 
 int pageNumber = 0;
@@ -54,7 +54,7 @@ class _TestFieldPageState extends State<TestFieldPage>{
   }
 }
 
-PageController controller = new PageController(viewportFraction: 1, initialPage: 0, keepPage: true);
+PageController controller = new PageController(viewportFraction: 1, initialPage: 0, keepPage: false);
 
 class Test extends StatefulWidget {
   final List<Question> question;
@@ -78,9 +78,13 @@ class _TestState extends State<Test>{
   String selectedChoiceButton = '';
   double selectedChoiceValueButton = 0;
   bool isClicked = false;
+  int doubleClick;
 
   @override
   void initState() {
+    setState(() {
+      doubleClick = 0;
+    });
     _player = new AudioPlayer();
     _player.setAsset(widget.question[0].pathAudio);
     super.initState();
@@ -102,11 +106,16 @@ class _TestState extends State<Test>{
               physics: NeverScrollableScrollPhysics(),
               itemCount: widget.question.length,
               onPageChanged: (val){
-                _player.stop();
-                BlocProvider.of<TimerBloc>(context).add(Reset());
-                BlocProvider.of<TimerBloc>(context).add(Start(duration: 20));
-                // BlocProvider.of<TimerBloc>(context).add(Reset());
-                print(val);
+                if(val >= 34){
+
+                }else{
+                  doubleClick = 0;
+                  selectedChoices.length = 0;
+                  _player.stop();
+                  BlocProvider.of<TimerBloc>(context).add(Reset());
+                  BlocProvider.of<TimerBloc>(context).add(Start(duration: 20));
+                  print(val);
+                }
               },
               controller: controller,
               itemBuilder: (context, index){
@@ -123,27 +132,25 @@ class _TestState extends State<Test>{
                               _player.setAsset(widget.question[index].pathAudio);
                               _player.play();
                             }
+                            if(state.duration <= 1){
+                              controller.nextPage(duration: Duration(seconds: 1), curve: Curves.ease);
+                            }
+                            if(widget.question[index].order  >= 35){
+                              // BlocProvider.of<TimerBloc>(context).add();
+                            }
                             return Align(child: Text('Süre : ${state.duration}', style: timerTextStyle,),);
                           }
                           if(state is Ready){
-                            BlocProvider.of<TimerBloc>(context).add(Start(duration: 20));
+                            return WarningPage();
                           }
                           if(state is Finished){
-                            _player.stop();
-                            print('object');
-                            controller.nextPage(duration: Duration(milliseconds: 500), curve: Curves.linear);
-                            BlocProvider.of<TimerBloc>(context).add(Reset());
-                            BlocProvider.of<TimerBloc>(context).add(Start(duration: 20));
-                            if(widget.question[index].order >= 35){
-                              BlocProvider.of<TimerBloc>(context).add(Pause());
-                              _player.stop();
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ResultPage(),
-                                        ));
-                            }
+                            return ResultPage();
                           }
+                          if(state is Pause){
+                              _player.stop();
+                              _player.dispose();
+                              return ResultPage();
+                            }
                           return Container();
                         },
                       ),
@@ -175,23 +182,37 @@ class _TestState extends State<Test>{
                                     builder: (context) => ResultPage(),
                                         )) :
                                 widget.question[index].order <= 5 ? (){
-                                  skipAnswer();
+                                  print('===================== $doubleClick');
+                                  if(widget.question[index].side == 2){
+                                    setState(() {
+                                      doubleClick++;
+                                    });
+                                    if(doubleClick == 2){
+                                      skipAnswer(index);
+                                    }
+                                  }else{
+                                    skipAnswer(index);
+                                  }
+                                  
                                 } :
                                 widget.question[index].side != 2 ?
                                 (){
-                                  selectedChoiceButton =
+                                  setState(() {
+                                    selectedChoiceButton =
                                       widget.question[index].answer[i].title;
                                   selectedChoiceValueButton =
                                       widget.question[index].answer[i].value;
                                   checkAnswer(index);
+                                  });
                                 }
                                 :
                                 (){
+                                  print('${selectedChoices.length} ===================');
                                   selectedChoices.contains(
                                       widget.question[index].answer[i])
                                   ? selectedChoices
                                       .remove(widget.question[index].answer[i])
-                                  : selectedChoices.length == 2
+                                  : selectedChoices.length == 1
                                   ? checkAnswer(index)
                                   : selectedChoices.add(
                                       widget.question[index].answer[i]);
@@ -210,7 +231,9 @@ class _TestState extends State<Test>{
                   ),
                 );
               }
-            ),
+            ) 
+            // :
+            
           ],
       ),
     );
@@ -256,7 +279,7 @@ class _TestState extends State<Test>{
     fontWeight: FontWeight.bold,
   );
 
-   skipAnswer(){
+   skipAnswer(int index){
     controller.nextPage(duration: Duration(seconds: 1), curve: Curves.ease);
   }
 
@@ -293,6 +316,10 @@ class _TestState extends State<Test>{
         }
       }
     }
+    // if(widget.question[index].order == 36){
+    //   BlocProvider.of<TimerBloc>(context).add(Pause());
+    //   _player.stop();
+    // }
     print('===============================');
     print('both left score : ${user.getBothLeftScore}');
     print('both right score : ${user.getBothRightScore}');

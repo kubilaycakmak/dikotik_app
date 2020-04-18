@@ -33,3 +33,7 @@ class Running extends TimerState {
 class Finished extends TimerState {
   const Finished() : super(0);
 }
+
+class Result extends TimerState {
+  const Result() : super(0);
+}

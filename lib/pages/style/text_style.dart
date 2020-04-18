@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 var titleText =
-    new TextStyle(fontSize: 22, fontWeight: FontWeight.bold, shadows: [
+    new TextStyle(fontSize: 22, color: Colors.black, fontWeight: FontWeight.bold, shadows: [
   Shadow(color: Colors.black12, offset: Offset(3, 5)),
 ]);
 var warningText = new TextStyle(
