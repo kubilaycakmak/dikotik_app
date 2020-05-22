@@ -1,9 +1,13 @@
 import 'package:dikotik_app/pages/entry_page.dart';
 import 'package:dikotik_app/pages/result_page.dart';
 import 'package:dikotik_app/pages/splash_page.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
+  runApp(MyApp());
+} 
 
 class MyApp extends StatelessWidget {
   @override
