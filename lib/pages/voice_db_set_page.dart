@@ -56,7 +56,6 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
     setState(() {});
   }
 
-
   setVol(int i) async {
     await Volume.setVol(i);
   }
@@ -85,7 +84,7 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
   Widget _buildVoiceDB(BuildContext context) {
     return Center(
       child: ListView(
-       padding: const EdgeInsets.symmetric(vertical: 120, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 120, horizontal: 20),
         children: <Widget>[
           Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -157,10 +156,24 @@ class _VoiceDbSetPageState extends State<VoiceDbSetPage> {
               onPressed: () {
                 audioPlayer.pause();
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => TestFieldPage(questions: user.getSelectSex == 0 ? user.getSelectText == '1' ? wqNumber : user.getSelectText == '2' ? wqSentences : user.getSelectText == '3' ? wqWord : 0 : user.getSelectText == '1' ? mqNumber : user.getSelectText == '2' ? mqSentences : user.getSelectText == '3' ? mqWord : 0,)),
-                            );
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => TestFieldPage(
+                            questions: user.getSelectSex == 0
+                                ? user.getSelectText == '1'
+                                    ? wqNumber
+                                    : user.getSelectText == '2'
+                                        ? wqSentences
+                                        : user.getSelectText == '3' ? wqWord : 0
+                                : user.getSelectText == '1'
+                                    ? mqNumber
+                                    : user.getSelectText == '2'
+                                        ? mqSentences
+                                        : user.getSelectText == '3'
+                                            ? mqWord
+                                            : 0,
+                          )),
+                );
               },
             ),
           ),

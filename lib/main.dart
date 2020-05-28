@@ -7,22 +7,22 @@ import 'package:flutter/material.dart';
 void main() {
   debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
   runApp(MyApp());
-} 
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: 'homeScreen',
-      routes: {
-        'homeScreen': (context) => EntryPage(),
-        'resultPage': (context) => ResultPage(),
-      },
-      debugShowCheckedModeBanner: false,
-      color: Colors.white,
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
-      ),
-      home: Splashscreen());
+        initialRoute: 'homeScreen',
+        routes: {
+          'homeScreen': (context) => EntryPage(),
+          'resultPage': (context) => ResultPage(),
+        },
+        debugShowCheckedModeBanner: false,
+        color: Colors.white,
+        theme: ThemeData(
+          primarySwatch: Colors.indigo,
+        ),
+        home: Splashscreen());
   }
 }
